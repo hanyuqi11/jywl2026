@@ -373,7 +373,7 @@ h3 {
     radial-gradient(ellipse 600px 400px at 65% 55%, rgba(212,166,58,0.06), transparent 60%),
     /* 高级红渐变遮罩 — 轻盈不压抑 */
     radial-gradient(ellipse at 50% 30%, rgba(180,0,24,0.04) 0%, rgba(122,0,18,0.10) 50%, rgba(74,0,10,0.18) 100%),
-    url('https://s41.ax1x.com/2026/05/25/pmCh1wd.png') center/cover no-repeat;
+    url('../images/hero-bg.png') center/cover no-repeat;
 }
 
 /* Hero Background Layers */
@@ -967,7 +967,7 @@ h3 {
   background:
     radial-gradient(ellipse 600px 400px at 50% 35%, rgba(212,166,58,0.08), transparent 60%),
     radial-gradient(ellipse at 50% 30%, rgba(180,0,24,0.04) 0%, rgba(122,0,18,0.10) 50%, rgba(74,0,10,0.18) 100%),
-    url('https://s41.ax1x.com/2026/05/25/pmCh1wd.png') center/cover no-repeat;
+    url('../images/hero-bg.png') center/cover no-repeat;
   color: #fff;
 }
 
