@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="吉养未来产品中心 - 抗联野菜脆棒、红粮玉米杂粮杯、黑土荞麦脆片、白山蓝莓冻干酸奶块，源自吉林革命老区的自然馈赠。">
+  <title>产品中心 · 吉养未来</title>
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    /* ===== 淘宝式商品详情 ===== */
+    .product-detail-section {
+      padding: var(--space-4xl) var(--space-xl);
+    }
+    .product-detail-section:nth-child(odd) {
+      background: var(--color-bg-alt);
+    }
+
+    .product-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+      align-items: start;
+    }
+    .product-detail.reverse {
+      direction: rtl;
+    }
+    .product-detail.reverse > * {
+      direction: ltr;
+    }
+
+    /* 商品主图 */
+    .product-visual {
+      aspect-ratio: 1;
+      border-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-visual.green-bg {
+      background: linear-gradient(135deg, #e8f0e4 0%, #d0e8c8 100%);
+    }
+    .product-visual.gold-bg {
+      background: linear-gradient(135deg, #f5eac0 0%, #ebd890 100%);
+    }
+    .product-visual.red-bg {
+      background: linear-gradient(135deg, #f5d8d4 0%, #eab8b0 100%);
+    }
+    .product-visual.blue-bg {
+      background: linear-gradient(135deg, #d8e8f0 0%, #c0d8e8 100%);
+    }
+    .product-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.02) 3px, rgba(0,0,0,0.02) 6px);
+    }
+
+    /* 商品信息区 */
+    .product-info .tag {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-md);
+    }
+    .tag-nature { background: var(--color-green-50, #e8f0e4); color: var(--color-green-700, #2d5a27); }
+    .tag-grain { background: var(--color-gold-100, #f5eac0); color: var(--color-gold-700, #8a6d1b); }
+    .tag-health { background: var(--color-red-50, #fce8e8); color: var(--color-red-700, #a82020); }
+    .tag-berry { background: #e8f0f8; color: #3a6a8a; }
+
+    .product-info h2 {
+      margin-bottom: var(--space-sm);
+      color: var(--color-soil);
+    }
+
+    .product-info .subtitle {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+      margin-bottom: var(--space-md);
+    }
+
+    /* 淘宝风价格区 */
+    .taobao-price-area {
+      background: linear-gradient(135deg, #FFF1F0, #FFF7F5);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-xl);
+      border: 1px solid #ffe0de;
+    }
+    .taobao-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-md);
+    }
+    .taobao-price-label {
+      font-size: 0.85rem;
+      color: #999;
+      flex-shrink: 0;
+    }
+    .taobao-price-symbol {
+      font-size: 1rem;
+      color: #FF5000;
+      font-weight: 600;
+    }
+    .taobao-price-value {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #FF5000;
+      line-height: 1;
+      font-family: var(--font-display);
+    }
+    .taobao-price-decimal {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #FF5000;
+      vertical-align: super;
+    }
+    .taobao-price-original {
+      font-size: 0.85rem;
+      color: #999;
+      text-decoration: line-through;
+      margin-left: var(--space-sm);
+    }
+    .taobao-promo-tags {
+      display: flex;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+      flex-wrap: wrap;
+    }
+    .taobao-promo-tag {
+      font-size: 0.72rem;
+      padding: 2px 10px;
+      background: linear-gradient(135deg, #FF5000, #FF6B35);
+      color: #fff;
+      border-radius: 3px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .taobao-promo-tag.outline {
+      background: transparent;
+      border: 1px solid #FF5000;
+      color: #FF5000;
+    }
+
+    /* 规格选择 */
+    .sku-section {
+      margin-bottom: var(--space-xl);
+    }
+    .sku-section-label {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: var(--space-sm);
+      font-weight: 500;
+    }
+    .sku-options {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+    .sku-option {
+      padding: 10px 22px;
+      border: 1.5px solid #ddd;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #fff;
+      color: #333;
+      font-weight: 500;
+      user-select: none;
+    }
+    .sku-option:hover {
+      border-color: #FF5000;
+      color: #FF5000;
+    }
+    .sku-option.active {
+      border-color: #FF5000;
+      background: #FFF1F0;
+      color: #FF5000;
+      font-weight: 700;
+    }
+
+    /* 数量选择器 */
+    .qty-section {
+      margin-bottom: var(--space-2xl);
+    }
+    .qty-section-label {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: var(--space-sm);
+      font-weight: 500;
+    }
+    .qty-selector {
+      display: inline-flex;
+      align-items: center;
+      border: 1.5px solid #ddd;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    .qty-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 1.2rem;
+      color: #666;
+      background: #f5f5f5;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+    .qty-btn:hover {
+      background: #e8e8e8;
+      color: #FF5000;
+    }
+    .qty-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .qty-input {
+      width: 56px;
+      height: 40px;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-left: 1.5px solid #ddd;
+      border-right: 1.5px solid #ddd;
+      outline: none;
+      color: #333;
+      -moz-appearance: textfield;
+    }
+    .qty-input::-webkit-outer-spin-button,
+    .qty-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* 购买按钮区 - 淘宝风格底部栏 */
+    .buy-actions {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+    .btn-add-cart {
+      flex: 1;
+      min-width: 160px;
+      padding: 16px 28px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #FF5000, #FF6B35);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(255, 80, 0, 0.35);
+      letter-spacing: 0.03em;
+    }
+    .btn-add-cart:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(255, 80, 0, 0.5);
+    }
+    .btn-buy-now {
+      flex: 1;
+      min-width: 160px;
+      padding: 16px 28px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 24px;
+      background: transparent;
+      color: #FF5000;
+      border: 2px solid #FF5000;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.03em;
+    }
+    .btn-buy-now:hover {
+      background: #FFF1F0;
+      transform: translateY(-2px);
+    }
+
+    /* 特性列表 */
+    .product-features {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .product-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+    }
+    .product-feature .feat-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #FF5000;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* 成分标签 */
+    .ingredient-bar {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-md);
+    }
+    .ingredient-tag {
+      padding: 4px 12px;
+      background: var(--color-bg);
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+      border: 1px solid var(--color-border-light);
+    }
+
+    @media (max-width: 768px) {
+      .product-detail {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+      }
+      .product-detail.reverse {
+        direction: ltr;
+      }
+      .product-visual {
+        aspect-ratio: 4/3;
+        font-size: 5rem;
+      }
+      .taobao-price-value {
+        font-size: 2rem;
+      }
+      .buy-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">
+          <img src="https://s41.ax1x.com/2026/05/25/pmCfaZ9.png" alt="吉养未来" onerror="this.style.display='none';this.parentElement.textContent='吉';">
+        </span>
+        吉养未来
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="products.html" class="nav-link active">红色产品</a>
+        <a href="honglv.html" class="nav-link">助农行动</a>
+        <a href="brand.html" class="nav-link">品牌故事</a>
+        <a href="xiaoshan.html" class="nav-link">AI小膳</a>
+        <a href="contact.html" class="nav-link">联系我们</a>
+      </div>
+      <a href="javascript:void(0)" class="nav-cta" onclick="toggleCart()" id="cartTrigger">🛒 购物车<span class="cart-badge-nav" id="cartBadgeNav">0</span></a>
+      <button class="nav-toggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper-inner">
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="breadcrumb">
+        <a href="index.html">首页</a><span class="sep">›</span><span>产品中心</span>
+      </div>
+      <h1>产品中心</h1>
+      <p>四款核心产品，源自吉林革命老区的长白山自然馈赠，以现代食品科技转化传统食材为健康零食</p>
+    </section>
+
+    <!-- ===== Product 1: 抗联野菜脆棒 ===== -->
+    <section class="product-detail-section">
+      <div class="section-inner">
+        <div class="product-detail reveal">
+          <div class="product-visual green-bg">
+            <img src="https://s41.ax1x.com/2026/05/25/pmCfdaR.png" alt="抗联野菜脆棒" style="width:85%;height:85%;object-fit:contain;" onerror="this.style.display='none';this.parentElement.textContent='🥬';">
+          </div>
+          <div class="product-info">
+            <span class="tag tag-nature">山野系列</span>
+            <h2>抗联野菜脆棒</h2>
+            <div class="ingredient-bar">
+              <span class="ingredient-tag">长白山山野菜</span>
+              <span class="ingredient-tag">低温烘焙</span>
+              <span class="ingredient-tag">非油炸</span>
+            </div>
+
+            <!-- 淘宝风价格区 -->
+            <div class="taobao-price-area">
+              <div class="taobao-price-row">
+                <span class="taobao-price-label">价格</span>
+                <span class="taobao-price-symbol">¥</span>
+                <span class="taobao-price-value">29</span>
+                <span class="taobao-price-decimal">.90</span>
+                <span class="taobao-price-original">¥39.90</span>
+              </div>
+              <div class="taobao-promo-tags">
+                <span class="taobao-promo-tag">老区直供</span>
+                <span class="taobao-promo-tag outline">新品尝鲜</span>
+                <span class="taobao-promo-tag outline">满2件包邮</span>
+              </div>
+            </div>
+
+            <!-- 规格选择 -->
+            <div class="sku-section">
+              <div class="sku-section-label">口味选择</div>
+              <div class="sku-options" data-product="product1">
+                <button class="sku-option active" data-sku="原味">原味</button>
+                <button class="sku-option" data-sku="香辣味">香辣味</button>
+              </div>
+            </div>
+
+            <!-- 数量 -->
+            <div class="qty-section">
+              <div class="qty-section-label">数量</div>
+              <div class="qty-selector">
+                <button class="qty-btn" onclick="changeQty('product1', -1)">−</button>
+                <input type="number" class="qty-input" id="qty-product1" value="1" min="1" max="99" onchange="validateQty('product1')">
+                <button class="qty-btn" onclick="changeQty('product1', 1)">+</button>
+              </div>
+            </div>
+
+            <!-- 特性 -->
+            <div class="product-features">
+              <div class="product-feature"><span class="feat-dot"></span>长白山野生环境生长，零污染、零添加</div>
+              <div class="product-feature"><span class="feat-dot"></span>60℃低温烘焙，保留膳食纤维与微量元素</div>
+              <div class="product-feature"><span class="feat-dot"></span>专利防潮锁鲜技术，开袋即食，酥脆如初</div>
+            </div>
+
+            <!-- 购买按钮 -->
+            <div class="buy-actions">
+              <button class="btn-add-cart" onclick="addToCart('product1')">加入购物车</button>
+              <button class="btn-buy-now" onclick="buyNow('product1')">立即购买</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Product 2: 红粮玉米杂粮杯 ===== -->
+    <section class="product-detail-section">
+      <div class="section-inner">
+        <div class="product-detail reverse reveal">
+          <div class="product-visual gold-bg">
+            <img src="https://s41.ax1x.com/2026/05/25/pmCfBPx.png" alt="红粮玉米杂粮杯" style="width:85%;height:85%;object-fit:contain;" onerror="this.style.display='none';this.parentElement.textContent='🌽';">
+          </div>
+          <div class="product-info">
+            <span class="tag tag-grain">杂粮系列</span>
+            <h2>红粮玉米杂粮杯</h2>
+            <div class="ingredient-bar">
+              <span class="ingredient-tag">吉林鲜食玉米</span>
+              <span class="ingredient-tag">杂粮拼配</span>
+              <span class="ingredient-tag">即食代餐</span>
+            </div>
+
+            <div class="taobao-price-area">
+              <div class="taobao-price-row">
+                <span class="taobao-price-label">价格</span>
+                <span class="taobao-price-symbol">¥</span>
+                <span class="taobao-price-value">36</span>
+                <span class="taobao-price-decimal">.90</span>
+                <span class="taobao-price-original">¥49.90</span>
+              </div>
+              <div class="taobao-promo-tags">
+                <span class="taobao-promo-tag">老区直供</span>
+                <span class="taobao-promo-tag outline">爆款推荐</span>
+                <span class="taobao-promo-tag outline">满2件包邮</span>
+              </div>
+            </div>
+
+            <div class="sku-section">
+              <div class="sku-section-label">规格选择</div>
+              <div class="sku-options" data-product="product2">
+                <button class="sku-option active" data-sku="便捷杯装">便捷杯装</button>
+                <button class="sku-option" data-sku="家庭袋装">家庭袋装</button>
+              </div>
+            </div>
+
+            <div class="qty-section">
+              <div class="qty-section-label">数量</div>
+              <div class="qty-selector">
+                <button class="qty-btn" onclick="changeQty('product2', -1)">−</button>
+                <input type="number" class="qty-input" id="qty-product2" value="1" min="1" max="99" onchange="validateQty('product2')">
+                <button class="qty-btn" onclick="changeQty('product2', 1)">+</button>
+              </div>
+            </div>
+
+            <div class="product-features">
+              <div class="product-feature"><span class="feat-dot"></span>黄金纬度带种植，甜糯饱满，自然清甜</div>
+              <div class="product-feature"><span class="feat-dot"></span>玉米+荞麦+燕麦+小米，营养均衡全面</div>
+              <div class="product-feature"><span class="feat-dot"></span>杯装便携，热水冲泡，3分钟即食</div>
+            </div>
+
+            <div class="buy-actions">
+              <button class="btn-add-cart" onclick="addToCart('product2')">加入购物车</button>
+              <button class="btn-buy-now" onclick="buyNow('product2')">立即购买</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Product 3: 黑土荞麦脆片 ===== -->
+    <section class="product-detail-section">
+      <div class="section-inner">
+        <div class="product-detail reveal">
+          <div class="product-visual red-bg">🥜</div>
+          <div class="product-info">
+            <span class="tag tag-health">轻食系列</span>
+            <h2>黑土荞麦脆片</h2>
+            <div class="ingredient-bar">
+              <span class="ingredient-tag">吉林黑土地荞麦</span>
+              <span class="ingredient-tag">手工烘焙</span>
+              <span class="ingredient-tag">高膳食纤维</span>
+            </div>
+
+            <div class="taobao-price-area">
+              <div class="taobao-price-row">
+                <span class="taobao-price-label">价格</span>
+                <span class="taobao-price-symbol">¥</span>
+                <span class="taobao-price-value">25</span>
+                <span class="taobao-price-decimal">.90</span>
+                <span class="taobao-price-original">¥35.90</span>
+              </div>
+              <div class="taobao-promo-tags">
+                <span class="taobao-promo-tag">老区直供</span>
+                <span class="taobao-promo-tag outline">轻食必备</span>
+                <span class="taobao-promo-tag outline">满2件包邮</span>
+              </div>
+            </div>
+
+            <div class="sku-section">
+              <div class="sku-section-label">口味选择</div>
+              <div class="sku-options" data-product="product3">
+                <button class="sku-option active" data-sku="原味">原味</button>
+                <button class="sku-option" data-sku="芝麻味">芝麻味</button>
+              </div>
+            </div>
+
+            <div class="qty-section">
+              <div class="qty-section-label">数量</div>
+              <div class="qty-selector">
+                <button class="qty-btn" onclick="changeQty('product3', -1)">−</button>
+                <input type="number" class="qty-input" id="qty-product3" value="1" min="1" max="99" onchange="validateQty('product3')">
+                <button class="qty-btn" onclick="changeQty('product3', 1)">+</button>
+              </div>
+            </div>
+
+            <div class="product-features">
+              <div class="product-feature"><span class="feat-dot"></span>世界三大黑土带之一，有机质丰富</div>
+              <div class="product-feature"><span class="feat-dot"></span>富含膳食纤维与植物蛋白，轻负担高满足</div>
+              <div class="product-feature"><span class="feat-dot"></span>传统手工烘焙，非油炸，保留原香</div>
+            </div>
+
+            <div class="buy-actions">
+              <button class="btn-add-cart" onclick="addToCart('product3')">加入购物车</button>
+              <button class="btn-buy-now" onclick="buyNow('product3')">立即购买</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Product 4: 白山蓝莓冻干酸奶块 ===== -->
+    <section class="product-detail-section">
+      <div class="section-inner">
+        <div class="product-detail reverse reveal">
+          <div class="product-visual blue-bg">🫐</div>
+          <div class="product-info">
+            <span class="tag tag-berry">冻干系列</span>
+            <h2>白山蓝莓冻干酸奶块</h2>
+            <div class="ingredient-bar">
+              <span class="ingredient-tag">长白山蓝莓</span>
+              <span class="ingredient-tag">冻干锁鲜</span>
+              <span class="ingredient-tag">活性益生菌</span>
+            </div>
+
+            <div class="taobao-price-area">
+              <div class="taobao-price-row">
+                <span class="taobao-price-label">价格</span>
+                <span class="taobao-price-symbol">¥</span>
+                <span class="taobao-price-value">39</span>
+                <span class="taobao-price-decimal">.90</span>
+                <span class="taobao-price-original">¥55.90</span>
+              </div>
+              <div class="taobao-promo-tags">
+                <span class="taobao-promo-tag">老区直供</span>
+                <span class="taobao-promo-tag outline">高端冻干</span>
+                <span class="taobao-promo-tag outline">满2件包邮</span>
+              </div>
+            </div>
+
+            <div class="sku-section">
+              <div class="sku-section-label">规格选择</div>
+              <div class="sku-options" data-product="product4">
+                <button class="sku-option active" data-sku="120g装">120g装</button>
+                <button class="sku-option" data-sku="180g装">180g装</button>
+              </div>
+            </div>
+
+            <div class="qty-section">
+              <div class="qty-section-label">数量</div>
+              <div class="qty-selector">
+                <button class="qty-btn" onclick="changeQty('product4', -1)">−</button>
+                <input type="number" class="qty-input" id="qty-product4" value="1" min="1" max="99" onchange="validateQty('product4')">
+                <button class="qty-btn" onclick="changeQty('product4', 1)">+</button>
+              </div>
+            </div>
+
+            <div class="product-features">
+              <div class="product-feature"><span class="feat-dot"></span>高寒昼夜温差大，花青素含量高，自然酸甜</div>
+              <div class="product-feature"><span class="feat-dot"></span>零下35℃真空冻干，锁住营养与原始风味</div>
+              <div class="product-feature"><span class="feat-dot"></span>入口即化，酸奶与蓝莓的绝妙相遇</div>
+            </div>
+
+            <div class="buy-actions">
+              <button class="btn-add-cart" onclick="addToCart('product4')">加入购物车</button>
+              <button class="btn-buy-now" onclick="buyNow('product4')">立即购买</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Us -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="text-eyebrow">品质承诺</span>
+          <h2>从田间到舌尖的安心</h2>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-item reveal">
+            <div class="feature-icon green">🏔️</div>
+            <h3>老区直供</h3>
+            <p>优先采购吉林革命老区合作社农产品，源头可追溯</p>
+          </div>
+          <div class="feature-item reveal">
+            <div class="feature-icon red">🔬</div>
+            <h3>科技加工</h3>
+            <p>低温烘焙、冻干锁鲜、防潮包装三大核心技术</p>
+          </div>
+          <div class="feature-item reveal">
+            <div class="feature-icon gold">✅</div>
+            <h3>安全承诺</h3>
+            <p>严格遵循普通预包装食品标准，不含任何药物成分</p>
+          </div>
+          <div class="feature-item reveal">
+            <div class="feature-icon green">♻️</div>
+            <h3>可持续发展</h3>
+            <p>带动合作社及农户20户以上，推动乡村产业振兴</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===== 购物车侧边栏 ===== -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3>🛒 购物车</h3>
+      <button class="cart-close-btn" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-drawer-body" id="cartDrawerBody">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛒</div>
+        <p>购物车是空的</p>
+        <span>快去选购老区好物吧～</span>
+      </div>
+    </div>
+    <div class="cart-drawer-footer" id="cartDrawerFooter" style="display:none;">
+      <div class="cart-footer-row">
+        <span>合计：</span>
+        <span class="cart-total-price" id="cartTotalPrice">¥0.00</span>
+      </div>
+      <button class="btn-checkout" onclick="checkout()">去结算</button>
+    </div>
+  </div>
+
+  <!-- ===== 结算弹窗 ===== -->
+  <div class="checkout-overlay" id="checkoutOverlay"></div>
+  <div class="checkout-modal" id="checkoutModal">
+    <div class="checkout-header">
+      <h3>确认订单</h3>
+      <button class="cart-close-btn" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="checkout-body" id="checkoutBody"></div>
+    <div class="checkout-footer">
+      <div class="checkout-total-row">
+        <span>应付总额：</span>
+        <span class="checkout-total-price" id="checkoutTotalPrice">¥0.00</span>
+      </div>
+      <button class="btn-submit-order" onclick="submitOrder()">提交订单</button>
+    </div>
+  </div>
+
+  <!-- ===== 订单成功弹窗 ===== -->
+  <div class="order-success-overlay" id="orderSuccessOverlay"></div>
+  <div class="order-success-modal" id="orderSuccessModal">
+    <div class="success-icon">✅</div>
+    <h3>下单成功！</h3>
+    <p id="orderSuccessMsg"></p>
+    <button class="btn-add-cart" onclick="closeOrderSuccess()" style="margin-top:24px;width:100%;max-width:240px;">知道了</button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <span class="logo-icon">吉</span>
+          吉养未来
+        </a>
+        <p>传承东北抗联精神<br>吉林革命老区红色助农食品品牌</p>
+      </div>
+      <div class="footer-col">
+        <h4>探索</h4>
+        <a href="products.html">红色产品</a>
+        <a href="honglv.html">助农行动</a>
+        <a href="brand.html">品牌故事</a>
+        <a href="xiaoshan.html">AI小膳</a>
+      </div>
+      <div class="footer-col">
+        <h4>服务</h4>
+        <a href="contact.html">联系我们</a>
+        <a href="#">合作咨询</a>
+      </div>
+      <div class="footer-col">
+        <h4>关注</h4>
+        <a href="#">微信公众号</a>
+        <a href="#">小红书</a>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span>© 2025 吉养未来 · 吉林革命老区红色助农品牌</span>
+        <span class="footer-disclaimer">普通预包装食品，不能代替药品</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/global.js"></script>
+</body>
+</html>

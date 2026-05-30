@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="联系吉养未来 - 吉林革命老区红色助农食品品牌。商务合作、产品咨询、媒体联系，我们期待与您交流。">
+  <title>联系我们 · 吉养未来</title>
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+      align-items: start;
+    }
+
+    .contact-form-section {
+      background: var(--color-card);
+      border-radius: var(--radius-xl);
+      padding: var(--space-3xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-form-section h2 {
+      margin-bottom: var(--space-sm);
+      font-size: 1.5rem;
+    }
+
+    .contact-form-section .form-desc {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-2xl);
+      font-size: 0.95rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    .contact-info-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+
+    .contact-info-card {
+      padding: var(--space-2xl);
+      background: var(--color-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--duration-normal);
+    }
+
+    .contact-info-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .contact-info-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .contact-info-icon.green { background: var(--color-green-50); }
+    .contact-info-icon.gold { background: var(--color-gold-100); }
+    .contact-info-icon.red { background: var(--color-red-50); }
+
+    .contact-info-card h4 {
+      font-size: 1rem;
+      margin-bottom: var(--space-xs);
+    }
+
+    .contact-info-card p {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    .social-links {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      margin-top: var(--space-md);
+    }
+
+    .social-link {
+      padding: var(--space-md) var(--space-lg);
+      background: var(--color-card);
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--duration-fast);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .social-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .faq-section {
+      background: var(--color-bg-alt);
+    }
+
+    .faq-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--color-card);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--duration-fast);
+    }
+
+    .faq-question {
+      padding: var(--space-lg) var(--space-xl);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      user-select: none;
+    }
+
+    .faq-question .faq-toggle {
+      font-size: 1.2rem;
+      transition: transform var(--duration-fast);
+      color: var(--color-text-tertiary);
+    }
+
+    .faq-answer {
+      padding: 0 var(--space-xl);
+      max-height: 0;
+      overflow: hidden;
+      transition: all var(--duration-normal) var(--ease-out);
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding-bottom: var(--space-lg);
+    }
+
+    .faq-item.open .faq-toggle {
+      transform: rotate(45deg);
+    }
+
+    @media (max-width: 768px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">
+          <img src="https://s41.ax1x.com/2026/05/25/pmCfaZ9.png" alt="吉养未来" onerror="this.style.display='none';this.parentElement.textContent='吉';">
+        </span>
+        吉养未来
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="products.html" class="nav-link">红色产品</a>
+        <a href="honglv.html" class="nav-link">助农行动</a>
+        <a href="brand.html" class="nav-link">品牌故事</a>
+        <a href="xiaoshan.html" class="nav-link">AI小膳</a>
+        <a href="contact.html" class="nav-link active">联系我们</a>
+      </div>
+      <a href="products.html" class="nav-cta">支持老区助农</a>
+      <button class="nav-toggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper-inner">
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="breadcrumb">
+        <a href="index.html">首页</a><span class="sep">›</span><span>联系我们</span>
+      </div>
+      <h1>联系我们</h1>
+      <p>无论您是消费者、合作伙伴还是对品牌感兴趣的各界朋友，我们都期待与您交流</p>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <div class="contact-layout">
+          <!-- Contact Form -->
+          <div class="contact-form-section reveal">
+            <h2>发送消息</h2>
+            <p class="form-desc">填写以下表单，我们会在1-2个工作日内回复您</p>
+            <form>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">姓名</label>
+                  <input type="text" class="form-input" placeholder="请输入姓名">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">手机号</label>
+                  <input type="text" class="form-input" placeholder="请输入手机号">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">邮箱</label>
+                <input type="email" class="form-input" placeholder="请输入邮箱地址">
+              </div>
+              <div class="form-group">
+                <label class="form-label">咨询类型</label>
+                <div class="pref-tags" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+                  <span class="pref-tag selected" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1.5px solid var(--color-green-500); background: var(--color-green-50); color: var(--color-green-700); font-size: 0.85rem; cursor: pointer;">产品咨询</span>
+                  <span class="pref-tag" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1.5px solid var(--color-border); font-size: 0.85rem; cursor: pointer;">商务合作</span>
+                  <span class="pref-tag" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1.5px solid var(--color-border); font-size: 0.85rem; cursor: pointer;">媒体联系</span>
+                  <span class="pref-tag" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1.5px solid var(--color-border); font-size: 0.85rem; cursor: pointer;">其他</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">留言内容</label>
+                <textarea class="form-input form-textarea" placeholder="请输入您想了解的内容或合作意向…"></textarea>
+              </div>
+              <button type="button" class="btn btn-primary btn-lg" onclick="alert('感谢您的留言！我们会尽快回复。')">发送留言</button>
+            </form>
+          </div>
+
+          <!-- Contact Info Sidebar -->
+          <div class="contact-info-sidebar reveal">
+            <div class="contact-info-card">
+              <div class="contact-info-icon green">📍</div>
+              <h4>品牌所在地</h4>
+              <p>吉林省长春市<br>辐射白山市、通化市、延边州等革命老区</p>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="contact-info-icon gold">📧</div>
+              <h4>电子邮箱</h4>
+              <p>contact@jiyangweilai.cn<br>商务合作专用</p>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="contact-info-icon red">📱</div>
+              <h4>社交媒体</h4>
+              <p>关注我们，了解更多品牌动态与产品信息</p>
+              <div class="social-links">
+                <a href="#" class="social-link">💬 微信公众号</a>
+                <a href="#" class="social-link">📕 小红书</a>
+                <a href="#" class="social-link">🎵 抖音</a>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="contact-info-icon green">🤝</div>
+              <h4>合作方向</h4>
+              <p>品牌联名、渠道合作、原料供应、校园推广——欢迎各界伙伴与我们携手共赢</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq-section">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="text-eyebrow">常见问题</span>
+          <h2>你可能想了解</h2>
+        </div>
+        <div class="faq-list reveal">
+          <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              <span>吉养未来的产品属于什么类别？</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              吉养未来所有产品均为普通预包装食品，严格遵守《食品安全法》《广告法》等相关规定，不涉及任何医疗、保健或治疗功能宣传。所有产品均明确标注"普通预包装食品，不能代替药品"。
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              <span>产品的原料来自哪里？</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              我们的核心原料均来自吉林革命老区：长白山山野菜产自白山市，鲜食玉米来自通化市及周边产区，黑木耳和蓝莓主要来自延边州和长白山保护区。我们优先与当地合作社建立订单化采购合作，确保原料品质和稳定供应。
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              <span>如何与吉养未来合作？</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              我们欢迎各类合作伙伴：品牌联名、线上线下渠道合作、食品原料供应合作、校园推广伙伴等。请通过本页面的联系表单提交合作意向，或发送邮件至商务合作邮箱，我们会尽快与您取得联系。
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              <span>产品支持全国配送吗？</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              目前我们正在逐步完善全国物流网络，优先覆盖东三省及华北地区。随着业务拓展，配送范围将逐步扩大至全国。具体配送范围请在下单时确认。
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+              <span>小膳AI助手如何使用？</span>
+              <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+              小膳是我们的AI营养科普助手，您可以在"AI智能体小膳"页面直接与它对话。它可以帮您查询食品营养知识、提供合理膳食建议、介绍吉林特色食材等。小膳基于大语言模型开发，旨在提供营养科普服务，不替代专业医疗建议。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="section-inner reveal">
+        <div class="cta-banner">
+          <h2>期待与您相遇</h2>
+          <p>关注吉养未来，了解更多吉林革命老区的红色故事与自然好物</p>
+          <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+            <a href="products.html" class="btn btn-gold btn-lg">探索产品</a>
+            <a href="brand.html" class="btn btn-outline btn-lg" style="border-color: rgba(255,255,255,0.4); color: white;">了解品牌</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <span class="logo-icon">吉</span>
+          吉养未来
+        </a>
+        <p>传承东北抗联精神<br>吉林革命老区红色助农食品品牌</p>
+      </div>
+      <div class="footer-col">
+        <h4>探索</h4>
+        <a href="products.html">红色产品</a>
+        <a href="honglv.html">助农行动</a>
+        <a href="brand.html">品牌故事</a>
+        <a href="xiaoshan.html">AI小膳</a>
+      </div>
+      <div class="footer-col">
+        <h4>服务</h4>
+        <a href="contact.html">联系我们</a>
+        <a href="#">合作咨询</a>
+      </div>
+      <div class="footer-col">
+        <h4>关注</h4>
+        <a href="#">微信公众号</a>
+        <a href="#">小红书</a>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span>© 2025 吉养未来 · 吉林革命老区红色助农品牌</span>
+        <span class="footer-disclaimer">普通预包装食品，不能代替药品</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/global.js"></script>
+</body>
+</html>

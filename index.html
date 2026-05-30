@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="吉养未来 - 传承抗联精神，赋能老区振兴。医学生青年团队深耕吉林革命老区，让好食材走出深山，让好日子有奔头。">
+  <title>吉养未来 · 红色助农品牌 | 把青春写进黑土地</title>
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    /* ========================================
+       首页专用样式 - 完全重构版
+       ======================================== */
+
+    /* --- 产品预览区 --- */
+    .products-preview {
+      background: linear-gradient(180deg, #F8F4EE 0%, #F0EBE4 100%);
+    }
+
+    .product-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+
+    .product-showcase-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.5);
+      box-shadow: 0 4px 24px rgba(90, 10, 10, 0.06);
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+
+    .product-showcase-card:hover {
+      box-shadow: 0 16px 48px rgba(90, 10, 10, 0.10);
+      transform: translateY(-4px);
+      border-color: rgba(212,166,58,0.15);
+    }
+
+    .product-showcase-img {
+      width: 100%;
+      height: 320px;
+      background: linear-gradient(135deg, rgba(248,244,238,0.5), rgba(240,235,228,0.5));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .product-showcase-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-showcase-body {
+      padding: var(--space-xl);
+    }
+
+    .product-showcase-body .tag {
+      display: inline-block;
+      padding: 4px 14px;
+      background: rgba(179, 0, 24, 0.07);
+      color: var(--color-red);
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .product-showcase-body h3 {
+      font-size: 1.35rem;
+      margin-bottom: var(--space-sm);
+      color: var(--color-text);
+    }
+
+    .product-showcase-body p {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--space-md);
+    }
+
+    /* ========================================
+       Section 2: Stats + Mission (Apple Style)
+       ======================================== */
+
+    /* --- 整体容器 --- */
+    .brand-section {
+      position: relative;
+      background:
+        linear-gradient(180deg, #F8F4EE 0%, #F0EBE4 45%, #EAE3DA 100%);
+      overflow: hidden;
+    }
+
+    /* 极淡氛围纹理 */
+    .brand-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.03;
+      background:
+        /* 黑土地横向纹理 */
+        repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(74,12,8,0.10) 80px, rgba(74,12,8,0.10) 81px),
+        /* 丝绸竖向渐变 */
+        linear-gradient(90deg, rgba(180,0,24,0.02) 0%, transparent 30%, transparent 70%, rgba(212,166,58,0.02) 100%),
+        /* 暖金光点 */
+        radial-gradient(circle at 20% 30%, rgba(212,166,58,0.10) 0%, transparent 50%),
+        radial-gradient(circle at 75% 65%, rgba(212,166,58,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(179,0,24,0.04) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* --- Stats 数据条 --- */
+    .brand-stats {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px var(--space-xl) 56px;
+    }
+
+    .brand-stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .brand-stats-item {
+      text-align: center;
+      padding: 0 var(--space-lg);
+      position: relative;
+    }
+
+    .brand-stats-item + .brand-stats-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10%;
+      height: 80%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(179,0,24,0.10), transparent);
+    }
+
+    .brand-stats-num {
+      font-size: 64px;
+      font-weight: 700;
+      color: #B30018;
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+      font-family: var(--font-display);
+    }
+
+    .brand-stats-num small {
+      font-size: 40px;
+      font-weight: 500;
+      color: #C42038;
+    }
+
+    .brand-stats-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #3A1A18;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-stats-desc {
+      font-size: 13px;
+      color: #8E7E76;
+      line-height: 1.6;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+
+    /* --- 标题区 --- */
+    .brand-header {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 20px var(--space-xl) 64px;
+    }
+
+    .brand-header .eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: #B30018;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .brand-header h2 {
+      font-size: 64px;
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      color: #3A1A18;
+      margin-bottom: 20px;
+      font-family: var(--font-display);
+    }
+
+    .brand-header .subtitle {
+      font-size: 18px;
+      line-height: 1.9;
+      color: #6B5B57;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* --- 毛玻璃卡片 --- */
+    .brand-cards {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--space-xl) 100px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .brand-card {
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 28px;
+      border: 1px solid rgba(180,0,24,0.04);
+      box-shadow: 0 8px 36px rgba(90, 10, 10, 0.04);
+      padding: 48px 36px;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 28px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,166,58,0.05), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .brand-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 56px rgba(90, 10, 10, 0.08);
+      border-color: rgba(179,0,24,0.10);
+    }
+
+    .brand-card:hover::after {
+      opacity: 1;
+    }
+
+    .brand-card-num {
+      font-size: 13px;
+      font-weight: 600;
+      color: #B30018;
+      letter-spacing: 0.12em;
+      margin-bottom: 24px;
+    }
+
+    .brand-card-icon {
+      margin-bottom: 28px;
+      width: 44px;
+      height: 44px;
+    }
+
+    .brand-card-icon svg {
+      width: 44px;
+      height: 44px;
+      stroke: #B30018;
+      stroke-width: 1.5;
+      opacity: 0.55;
+      fill: none;
+    }
+
+    .brand-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #3A1A18;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-card .card-sub {
+      font-size: 14px;
+      color: #6B5B57;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .brand-card p {
+      font-size: 15px;
+      color: #8E7E76;
+      line-height: 1.75;
+    }
+
+    /* --- 过渡渐变分隔 --- */
+    .brand-divider {
+      position: relative;
+      z-index: 2;
+      height: 1px;
+      max-width: 1280px;
+      margin: 0 auto;
+      background: linear-gradient(90deg, transparent, rgba(179,0,24,0.06) 20%, rgba(179,0,24,0.10) 50%, rgba(179,0,24,0.06) 80%, transparent);
+    }
+
+    /* --- 响应式 --- */
+    @media (max-width: 1024px) {
+      .brand-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .brand-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px 0;
+      }
+      .brand-stats-item + .brand-stats-item::before {
+        display: none;
+      }
+      .brand-header h2 {
+        font-size: 44px;
+        letter-spacing: -1px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .brand-cards {
+        grid-template-columns: 1fr;
+        padding: 0 var(--space-md) 60px;
+      }
+      .brand-stats-row {
+        grid-template-columns: 1fr;
+        gap: 28px 0;
+      }
+      .brand-header h2 {
+        font-size: 34px;
+      }
+      .brand-stats-num {
+        font-size: 48px;
+      }
+      .brand-card {
+        padding: 36px 28px;
+      }
+    }
+
+    /* --- 品牌故事预告 --- */
+    .story-teaser {
+      background:
+        radial-gradient(ellipse at 65% 30%, rgba(212,166,58,0.10), transparent 55%),
+        linear-gradient(170deg, #B30018 0%, #7A0012 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-teaser::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -5%;
+      width: 45%;
+      height: 140%;
+      background:
+        radial-gradient(ellipse at center, rgba(212, 166, 58, 0.12), transparent),
+        radial-gradient(ellipse at 30% 70%, rgba(255,255,255,0.03), transparent 60%);
+      pointer-events: none;
+    }
+
+    .story-teaser-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .story-teaser-content h2 {
+      color: white;
+      margin-bottom: var(--space-lg);
+    }
+
+    .story-teaser-content p {
+      color: rgba(255,255,255,0.82);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: var(--space-xl);
+    }
+
+    .story-teaser-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .story-visual-box {
+      width: 320px;
+      aspect-ratio: 1;
+      border-radius: var(--radius-xl);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-visual-box .mountain-icon {
+      font-size: 7rem;
+      opacity: 0.65;
+    }
+
+    .story-visual-box .label {
+      margin-top: var(--space-md);
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.12em;
+    }
+
+    /* --- AI 小膳预告 --- */
+    .ai-teaser-section {
+      background: var(--color-bg-alt);
+    }
+
+    .ai-teaser-visual {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(212,166,58,0.06), rgba(179,0,24,0.04));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(179,0,24,0.05);
+    }
+
+    /* ========================================
+       Brand Finale - 高端品牌收尾区 v3.0
+       ======================================== */
+    .brand-finale {
+      position: relative;
+      min-height: 800px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background:
+        /* 暖金色体积光 — 华为发布会级高级灯光 */
+        radial-gradient(ellipse 600px 350px at 55% 40%, rgba(212,166,58,0.14), transparent 60%),
+        radial-gradient(ellipse 400px 250px at 75% 60%, rgba(212,166,58,0.08), transparent 55%),
+        /* 高级红渐变 */
+        radial-gradient(ellipse at 25% 65%, rgba(180,0,24,0.12), transparent 50%),
+        linear-gradient(180deg, #B30018 0%, #7A0012 45%, #5A000E 100%);
+    }
+
+    .brand-finale::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.04;
+      background:
+        /* 丝绸流动纹理 — 现代东方美学 */
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 120px,
+          rgba(255,255,255,0.12) 120px,
+          rgba(255,255,255,0.12) 121px
+        ),
+        radial-gradient(ellipse 450px 180px at 35% 75%, rgba(212,166,58,0.15), transparent),
+        radial-gradient(ellipse 350px 140px at 70% 30%, rgba(212,166,58,0.10), transparent);
+    }
+
+    .finale-bg-mountains {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      z-index: 1;
+      background: linear-gradient(180deg, transparent 0%, rgba(90,0,14,0.35) 60%, #5A000E 100%);
+      pointer-events: none;
+    }
+
+    .finale-bg-mountains::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        /* 长白山轮廓 — 极淡水墨 3%-6% */
+        radial-gradient(ellipse 240px 140px at 15% 30%, rgba(74,10,10,0.25), transparent),
+        radial-gradient(ellipse 300px 180px at 40% 20%, rgba(74,10,10,0.28), transparent),
+        radial-gradient(ellipse 260px 150px at 65% 25%, rgba(74,10,10,0.25), transparent),
+        radial-gradient(ellipse 200px 120px at 85% 35%, rgba(74,10,10,0.22), transparent);
+    }
+
+    .finale-bg-glow {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30%;
+      z-index: 1;
+      background: radial-gradient(ellipse at 50% 100%, rgba(212,166,58,0.10), transparent 70%);
+      pointer-events: none;
+    }
+
+    .finale-particles {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .brand-finale-inner {
+      position: relative;
+      z-index: 3;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 100px var(--space-xl);
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .brand-finale-left {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .brand-finale-left.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .brand-finale-eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: #E8C868;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .brand-finale-left h2 {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      color: #FFFFFF;
+      text-shadow: 0 0 30px rgba(212,166,58,0.15);
+      margin-bottom: 20px;
+    }
+
+    .brand-finale-subtitle {
+      font-size: 17px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 44px;
+      max-width: 460px;
+    }
+
+    .brand-finale-values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 44px;
+    }
+
+    .brand-finale-value-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 24px 20px;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-finale-value-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 20px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(212,166,58,0.05), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .brand-finale-value-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(212,166,58,0.22);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.2);
+    }
+
+    .brand-finale-value-card:hover::after {
+      opacity: 1;
+    }
+
+    .brand-finale-value-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: #E8C868;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+
+    .brand-finale-value-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .brand-finale-value-card p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+    }
+
+    .brand-finale-stats {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 40px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+    }
+
+    .brand-finale-stat {
+      text-align: left;
+    }
+
+    .brand-finale-stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #E8C868;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .brand-finale-stat-value small {
+      font-size: 18px;
+      font-weight: 500;
+      color: #D4A63A;
+    }
+
+    .brand-finale-stat-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.04em;
+    }
+
+    .brand-finale-actions {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .brand-finale-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 36px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #E8C868, #D4A63A);
+      color: #3A1A18;
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(212,166,58,0.25);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: pointer;
+    }
+
+    .brand-finale-btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(212,166,58,0.40);
+      background: linear-gradient(135deg, #F0D880, #E0B848);
+    }
+
+    .brand-finale-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 36px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 14px;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: pointer;
+    }
+
+    .brand-finale-btn-secondary:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(212,166,58,0.50);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .brand-finale-compliance {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.03em;
+    }
+
+    .brand-finale-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.94);
+      transition: all 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: 0.15s;
+    }
+
+    .brand-finale-right.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .finale-product-stage {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .finale-mountain-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.22;
+    }
+
+    .finale-golden-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,166,58,0.16), transparent 70%);
+      animation: finalGlow 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes finalGlow {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.08); }
+    }
+
+    .finale-product {
+      position: absolute;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 44px rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: all 0.5s ease;
+    }
+
+    .finale-product:hover {
+      border-color: rgba(212,166,58,0.35);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25), 0 0 30px rgba(212,166,58,0.12);
+    }
+
+    .finale-product img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .finale-product-1 {
+      width: 150px;
+      height: 150px;
+      top: 8%;
+      left: 5%;
+      animation: floatProduct1 7s ease-in-out infinite;
+    }
+
+    .finale-product-2 {
+      width: 130px;
+      height: 130px;
+      top: 30%;
+      right: 8%;
+      animation: floatProduct2 8s ease-in-out infinite;
+      animation-delay: -2s;
+    }
+
+    .finale-product-3 {
+      width: 120px;
+      height: 120px;
+      bottom: 15%;
+      left: 15%;
+      animation: floatProduct3 9s ease-in-out infinite;
+      animation-delay: -4s;
+    }
+
+    .finale-product-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, rgba(212,166,58,0.12), rgba(179,0,24,0.08));
+    }
+
+    @keyframes floatProduct1 {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-14px) rotate(1deg); }
+    }
+
+    @keyframes floatProduct2 {
+      0%, 100% { transform: translateY(0) rotate(3deg); }
+      50% { transform: translateY(-10px) rotate(-2deg); }
+    }
+
+    @keyframes floatProduct3 {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-16px) rotate(2deg); }
+    }
+
+    /* --- 响应式 --- */
+    @media (max-width: 1024px) {
+      .brand-finale-inner {
+        grid-template-columns: 1fr;
+        gap: 56px;
+      }
+      .brand-finale-right {
+        order: -1;
+      }
+      .brand-finale-stats {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .product-showcase {
+        grid-template-columns: 1fr;
+      }
+
+      .story-teaser-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .story-teaser-visual {
+        order: -1;
+      }
+
+      .story-visual-box {
+        width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================
+       Navigation
+       ======================================== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">
+          <img src="https://s41.ax1x.com/2026/05/25/pmCfaZ9.png" alt="吉养未来" onerror="this.style.display='none';this.parentElement.textContent='吉';">
+        </span>
+        吉养未来
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link active">首页</a>
+        <a href="products.html" class="nav-link">红色产品</a>
+        <a href="honglv.html" class="nav-link">助农行动</a>
+        <a href="brand.html" class="nav-link">品牌故事</a>
+        <a href="xiaoshan.html" class="nav-link">AI小膳</a>
+        <a href="contact.html" class="nav-link">联系我们</a>
+      </div>
+      <a href="products.html" class="nav-cta">支持老区助农</a>
+      <button class="nav-toggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========================================
+       Hero Section
+       ======================================== -->
+  <section class="hero" id="hero">
+
+    <!-- 背景层：山脉轮廓 -->
+    <div class="hero-bg-mountains"></div>
+
+    <!-- 背景层：红绸光晕飘动 -->
+    <div class="hero-bg-ribbon" data-parallax="0.15"></div>
+
+    <!-- 背景层：金色暗纹 -->
+    <div class="hero-bg-stars"></div>
+
+    <!-- 背景层：纹理遮罩 -->
+    <div class="hero-bg-overlay"></div>
+
+    <!-- 金色粒子 Canvas -->
+    <canvas id="heroParticles" class="hero-particles"></canvas>
+
+    <!-- 左下角：抗联战士剪影 -->
+    <div class="hero-silhouette-left">
+      <svg viewBox="0 0 320 500" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.4">
+        <path d="M160 100 C130 80 100 100 90 140 C80 180 70 220 75 260 C80 300 90 340 100 370 C110 400 130 430 150 460 C160 480 170 500 160 500 C155 500 145 480 130 450 C110 410 90 370 70 340 C50 310 30 290 15 270 C5 255 0 245 5 230 C10 215 25 210 35 220 C45 230 50 240 55 230 C60 220 55 200 45 180 C35 160 30 140 35 120 C40 100 55 85 75 75 C95 65 115 60 130 65 C145 70 155 85 160 100Z" fill="#3A1A18"/>
+        <path d="M320 500 L290 490 C270 480 260 460 255 440 C250 420 245 400 240 380 C235 360 230 340 228 320 C226 300 230 280 240 270 C250 260 265 255 280 260 C295 265 305 280 310 300 C315 320 318 350 320 380 L320 500Z" fill="#3A1A18"/>
+      </svg>
+    </div>
+
+    <!-- 右下角：农产品剪影 -->
+    <div class="hero-silhouette-right">
+      <svg viewBox="0 0 280 400" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
+        <circle cx="140" cy="80" r="40" fill="#D4AF37"/>
+        <ellipse cx="80" cy="180" rx="30" ry="50" fill="#D4AF37"/>
+        <ellipse cx="200" cy="180" rx="30" ry="50" fill="#D4AF37"/>
+        <ellipse cx="140" cy="280" rx="50" ry="35" fill="#D4AF37"/>
+        <path d="M60 250 C40 280 50 350 80 380 C110 410 170 410 200 380 C230 350 240 280 220 250" fill="#C9A227"/>
+        <ellipse cx="140" cy="330" rx="20" ry="15" fill="#B8942A"/>
+      </svg>
+    </div>
+
+    <!-- 主内容 -->
+    <div class="hero-inner">
+      <div class="hero-content">
+
+        <!-- 品牌标签 -->
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          传承抗联精神 · 赋能老区振兴
+        </div>
+
+        <!-- 主标题 -->
+        <h1 class="hero-title">吉养未来</h1>
+
+        <!-- 副标题 -->
+        <p class="hero-subtitle">
+          <span class="highlight">把青春写进黑土地</span>
+          医学生青年团队 · 深耕吉林革命老区<br>
+          让好食材走出深山 让好日子有奔头
+        </p>
+
+        <!-- 按钮 -->
+        <div class="hero-actions">
+          <a href="products.html" class="btn btn-primary btn-lg">查看红色助农产品</a>
+          <a href="brand.html" class="btn btn-secondary btn-lg">阅读我们的故事</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 合规声明 -->
+    <p class="hero-compliance">
+      本品牌所有产品均为普通预包装食品，不能代替药品
+    </p>
+
+    <!-- 向下滚动引导 -->
+    <div class="hero-scroll-guide" onclick="document.getElementById('mission').scrollIntoView({behavior:'smooth'})">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+      <span class="scroll-text">向下探索</span>
+    </div>
+
+  </section>
+
+  <!-- ========================================
+       Section 2: Brand Stats + Mission (Apple Style)
+       ======================================== -->
+  <div class="brand-section" id="mission">
+
+    <!-- Stats 数据条 -->
+    <div class="brand-stats">
+      <div class="brand-stats-row">
+        <div class="brand-stats-item reveal">
+          <div class="brand-stats-num" data-count="4">4</div>
+          <div class="brand-stats-title">核心产品系列</div>
+          <div class="brand-stats-desc">覆盖早餐轻食、健康零食与文旅伴手礼场景</div>
+        </div>
+        <div class="brand-stats-item reveal">
+          <div class="brand-stats-num">20<small>+</small></div>
+          <div class="brand-stats-title">合作农户与供应端</div>
+          <div class="brand-stats-desc">优先对接吉林革命老区合作社与特色种植基地</div>
+        </div>
+        <div class="brand-stats-item reveal">
+          <div class="brand-stats-num">15<small>—20</small> <span style="font-size:18px;font-weight:400;color:#8E7E76;">吨</span></div>
+          <div class="brand-stats-title">预计年采购量</div>
+          <div class="brand-stats-desc">重点采购鲜食玉米、山野菜、黑木耳等特色农产品</div>
+        </div>
+        <div class="brand-stats-item reveal">
+          <div class="brand-stats-num">6 <span style="font-size:18px;font-weight:400;color:#8E7E76;">场</span></div>
+          <div class="brand-stats-title">用户试吃与调研活动</div>
+          <div class="brand-stats-desc">持续收集用户反馈并优化产品体验</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 分隔线 -->
+    <div class="brand-divider"></div>
+
+    <!-- 标题区 -->
+    <div class="brand-header reveal">
+      <span class="eyebrow">品牌使命</span>
+      <h2>来自吉林黑土地的健康轻食探索</h2>
+      <p class="subtitle">围绕吉林特色农产品开展产品研发、包装设计与品牌化表达。</p>
+    </div>
+
+    <!-- 毛玻璃卡片 -->
+    <div class="brand-cards">
+      <!-- 01 -->
+      <div class="brand-card reveal">
+        <div class="brand-card-num">01</div>
+        <div class="brand-card-icon">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 38 L12 20 L18 30 Q22 38 28 26 L32 14 L38 22" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 20 Q8 10 14 6" stroke-linecap="round"/>
+            <path d="M28 26 Q32 18 38 16" stroke-linecap="round"/>
+            <path d="M32 14 Q36 8 30 4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>老区溯源</h3>
+        <div class="card-sub">深入白山、通化、靖宇等地开展产业调研</div>
+        <p>优先对接吉林特色种植基地与合作社，推动优质农产品实现品牌化开发。</p>
+      </div>
+      <!-- 02 -->
+      <div class="brand-card reveal">
+        <div class="brand-card-num">02</div>
+        <div class="brand-card-icon">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="14" y="6" width="16" height="32" rx="4"/>
+            <path d="M14 12 L30 12" stroke-linecap="round"/>
+            <path d="M18 12 L18 32" stroke-linecap="round"/>
+            <path d="M14 10 L10 6 M30 10 L34 6" stroke-linecap="round"/>
+            <circle cx="22" cy="20" r="3"/>
+            <path d="M16 26 Q22 30 28 26" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>产品研发</h3>
+        <div class="card-sub">聚焦轻食与便携食品方向</div>
+        <p>围绕低温烘焙、冻干锁鲜与包装优化，持续提升产品口感与标准化能力。</p>
+      </div>
+      <!-- 03 -->
+      <div class="brand-card reveal">
+        <div class="brand-card-num">03</div>
+        <div class="brand-card-icon">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 4 C14 4 8 10 8 18 Q8 30 18 36 Q14 40 8 38" stroke-linecap="round"/>
+            <path d="M22 20 L22 36" stroke-linecap="round"/>
+            <path d="M16 28 Q22 24 28 28 Q22 32 16 28Z"/>
+            <path d="M36 4 L34 10 L40 10 L38 4Z"/>
+            <path d="M37 10 L33 22 L41 22 L37 10Z"/>
+          </svg>
+        </div>
+        <h3>产业助农</h3>
+        <div class="card-sub">探索特色农产品价值提升路径</div>
+        <p>推动吉林特色农产品从"卖原料"向"卖品牌"转变。</p>
+      </div>
+      <!-- 04 -->
+      <div class="brand-card reveal">
+        <div class="brand-card-num">04</div>
+        <div class="brand-card-icon">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 14 Q22 6 32 14" stroke-linecap="round"/>
+            <path d="M10 20 Q22 10 34 20" stroke-linecap="round"/>
+            <path d="M8 26 Q22 14 36 26" stroke-linecap="round"/>
+            <circle cx="22" cy="18" r="2"/>
+          </svg>
+        </div>
+        <h3>文化表达</h3>
+        <div class="card-sub">让地域文化融入年轻消费表达</div>
+        <p>将长白山文化与东北地域特色融入品牌视觉与产品设计。</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========================================
+       Products Preview
+       ======================================== -->
+  <section class="section products-preview">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="text-eyebrow">红色产品</span>
+        <h2>源自长白山的自然馈赠</h2>
+        <p class="section-subtitle">四款核心产品，将吉林革命老区特色农产品转化为现代健康食品</p>
+      </div>
+
+      <!-- 产品展示：红粮玉米杂粮杯 + 抗联野菜脆棒 -->
+      <div class="product-showcase">
+        <div class="product-showcase-card reveal">
+          <div class="product-showcase-img">
+            <img src="https://s41.ax1x.com/2026/05/25/pmCfBPx.png" alt="红粮玉米杂粮杯" onerror="this.parentElement.innerHTML='<div style=font-size:5rem>🌽</div>';">
+          </div>
+          <div class="product-showcase-body">
+            <span class="tag">吉林鲜食玉米</span>
+            <h3>红粮玉米杂粮杯</h3>
+            <p>精选吉林革命老区鲜食玉米，搭配多种杂粮科学配比，便捷即食，营养代餐新选择。每一杯都承载着黑土地的丰饶馈赠。</p>
+            <a href="products.html" class="btn btn-accent btn-sm">了解详情</a>
+          </div>
+        </div>
+
+        <div class="product-showcase-card reveal">
+          <div class="product-showcase-img">
+            <img src="https://s41.ax1x.com/2026/05/25/pmCfdaR.png" alt="抗联野菜脆棒" onerror="this.parentElement.innerHTML='<div style=font-size:5rem>🥬</div>';">
+          </div>
+          <div class="product-showcase-body">
+            <span class="tag">长白山山野菜</span>
+            <h3>抗联野菜脆棒</h3>
+            <p>采自长白山深处的野生山野菜，传承东北抗联时期"靠山吃山"的生存智慧，低温烘焙锁鲜，酥脆爽口，回味自然清香。</p>
+            <a href="products.html" class="btn btn-accent btn-sm">了解详情</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 更多产品 -->
+      <div class="product-grid" style="margin-top: var(--space-2xl);">
+        <div class="card reveal">
+          <div class="card-image" style="background: linear-gradient(135deg, rgba(179,0,24,0.06), rgba(212,166,58,0.06));">
+            <span style="font-size: 4rem;">🥜</span>
+          </div>
+          <div class="card-body">
+            <span class="card-tag accent">黑土地荞麦</span>
+            <h3 class="card-title">黑土荞麦脆片</h3>
+            <p class="card-desc">吉林黑土地优质荞麦，手工烘焙脆片，高纤轻食，健康随享</p>
+            <a href="products.html" style="color: #B30018; font-weight: 600; font-size: 0.9rem;">了解更多 →</a>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-image" style="background: linear-gradient(135deg, rgba(179,0,24,0.05), rgba(212,166,58,0.06));">
+            <span style="font-size: 4rem;">🫐</span>
+          </div>
+          <div class="card-body">
+            <span class="card-tag">长白山蓝莓</span>
+            <h3 class="card-title">白山蓝莓冻干酸奶块</h3>
+            <p class="card-desc">长白山蓝莓邂逅冻干技术，酸甜酥脆，一口咬下长白山的好味道</p>
+            <a href="products.html" style="color: #B30018; font-weight: 600; font-size: 0.9rem;">了解更多 →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       Brand Story Teaser
+       ======================================== -->
+  <section class="section story-teaser">
+    <div class="section-inner">
+      <div class="story-teaser-inner reveal">
+        <div class="story-teaser-content">
+          <span style="color: var(--color-gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">品牌故事</span>
+          <h2 style="margin-top: var(--space-sm);">传承抗联精神<br>振兴吉林好物</h2>
+          <p>
+            吉林——东北抗联精神的发源地。杨靖宇等革命先烈在白山松水间浴血奋战，形成了坚定信念、艰苦奋斗、百折不挠的抗联精神。如今，我们走进这片红色土地，以青年之力传承精神，以食品创新助力振兴。
+          </p>
+          <a href="brand.html" class="btn btn-gold btn-lg">走进品牌故事</a>
+        </div>
+        <div class="story-teaser-visual">
+          <div class="story-visual-box">
+            <div class="mountain-icon">🏔️</div>
+            <span class="label">长 白 山</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       AI 小膳 Teaser
+       ======================================== -->
+  <section class="section ai-teaser-section">
+    <div class="section-inner">
+      <div class="split-section reveal">
+        <div class="ai-teaser-visual">
+          <span style="font-size: 6rem;">🤖</span>
+        </div>
+        <div>
+          <span class="text-eyebrow">智能服务</span>
+          <h2 style="margin-bottom: var(--space-lg); color: var(--color-soil);">AI营养助手 · 小膳</h2>
+          <p class="text-body" style="margin-bottom: var(--space-xl);">
+            基于大模型开发的智能营养科普助手，为消费者提供食品营养知识查询、合理膳食建议和吉林特色食材科普。让健康饮食变得智能、简单、有趣。
+          </p>
+          <a href="xiaoshan.html" class="btn btn-accent btn-lg">体验小膳</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       Brand Finale - 高端品牌收尾区
+       ======================================== -->
+  <section class="brand-finale" id="finale">
+
+    <!-- 背景层 -->
+    <div class="finale-bg-mountains"></div>
+    <div class="finale-bg-glow"></div>
+    <canvas id="finaleParticles" class="finale-particles"></canvas>
+
+    <div class="brand-finale-inner">
+
+      <!-- 左侧：品牌内容 -->
+      <div class="brand-finale-left" id="finaleLeft">
+        <span class="brand-finale-eyebrow">Our Promise</span>
+        <h2>让吉林好物<br>走向更多人的餐桌</h2>
+        <p class="brand-finale-subtitle">
+          从白山松水到现代餐桌，<br>
+          让每一份来自革命老区的自然馈赠，<br>
+          被更多年轻消费者重新看见。
+        </p>
+
+        <!-- 3张品牌价值玻璃卡 -->
+        <div class="brand-finale-values">
+          <div class="brand-finale-value-card">
+            <div class="brand-finale-value-num">01</div>
+            <h4>原料直采</h4>
+            <p>深入吉林革命老区合作社，优先采购长白山特色农产品。</p>
+          </div>
+          <div class="brand-finale-value-card">
+            <div class="brand-finale-value-num">02</div>
+            <h4>青年研发</h4>
+            <p>围绕轻食化、便携化、年轻化，持续优化产品体验与包装设计。</p>
+          </div>
+          <div class="brand-finale-value-card">
+            <div class="brand-finale-value-num">03</div>
+            <h4>长期助农</h4>
+            <p>通过稳定订单与品牌传播，推动吉林特色农产品价值提升。</p>
+          </div>
+        </div>
+
+        <!-- 品牌数据横栏 -->
+        <div class="brand-finale-stats">
+          <div class="brand-finale-stat">
+            <div class="brand-finale-stat-value">4 <small>款</small></div>
+            <div class="brand-finale-stat-label">核心产品</div>
+          </div>
+          <div class="brand-finale-stat">
+            <div class="brand-finale-stat-value">20<small>+</small></div>
+            <div class="brand-finale-stat-label">合作农户</div>
+          </div>
+          <div class="brand-finale-stat">
+            <div class="brand-finale-stat-value">15 <small>吨</small></div>
+            <div class="brand-finale-stat-label">年采购目标</div>
+          </div>
+          <div class="brand-finale-stat">
+            <div class="brand-finale-stat-value">6 <small>场</small></div>
+            <div class="brand-finale-stat-label">线下体验活动</div>
+          </div>
+        </div>
+
+        <!-- 按钮 -->
+        <div class="brand-finale-actions">
+          <a href="products.html" class="brand-finale-btn-primary">
+            立即了解产品
+          </a>
+          <a href="brand.html" class="brand-finale-btn-secondary">
+            阅读品牌故事
+          </a>
+        </div>
+
+        <!-- 合规声明 -->
+        <p class="brand-finale-compliance">
+          本网站所有产品均为普通预包装食品，不涉及任何保健或治疗功能。
+        </p>
+      </div>
+
+      <!-- 右侧：产品悬浮展示 -->
+      <div class="brand-finale-right" id="finaleRight">
+        <div class="finale-product-stage">
+          <!-- 长白山轮廓 -->
+          <svg class="finale-mountain-svg" viewBox="0 0 460 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M80 220 L140 160 L180 210 L230 150 L280 200 L340 140 L390 190 L420 170 L460 210 L460 460 L0 460 L0 230 L40 210" fill="url(#fmGold)" opacity="0.35"/>
+            <path d="M120 250 L170 200 L210 240 L260 185 L310 230 L370 180 L410 220 L460 200 L460 460 L0 460 L0 240 L60 230" fill="url(#fmDark)" opacity="0.45"/>
+            <defs>
+              <linearGradient id="fmGold" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#D4A63A" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="#D4A63A" stop-opacity="0.04"/>
+              </linearGradient>
+              <linearGradient id="fmDark" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#5A000E" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#4A000A" stop-opacity="0.85"/>
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <!-- 金光柔光 -->
+          <div class="finale-golden-glow"></div>
+
+          <!-- 悬浮产品1：红粮玉米杂粮杯 -->
+          <div class="finale-product finale-product-1">
+            <img src="https://s41.ax1x.com/2026/05/25/pmCfBPx.png" alt="红粮玉米杂粮杯" onerror="this.parentElement.innerHTML='<div class=finale-product-placeholder>🌽</div>';">
+          </div>
+
+          <!-- 悬浮产品2：抗联野菜脆棒 -->
+          <div class="finale-product finale-product-2">
+            <img src="https://s41.ax1x.com/2026/05/25/pmCfdaR.png" alt="抗联野菜脆棒" onerror="this.parentElement.innerHTML='<div class=finale-product-placeholder>🥬</div>';">
+          </div>
+
+          <!-- 悬浮产品3：蓝莓冻干酸奶块（暂无CDN，占位） -->
+          <div class="finale-product finale-product-3">
+            <div class="finale-product-placeholder">🫐</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================
+       Footer
+       ======================================== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <span class="logo-icon">
+            <img src="https://s41.ax1x.com/2026/05/25/pmCfaZ9.png" alt="吉养未来" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none';this.parentElement.textContent='吉';">
+          </span>
+          吉养未来
+        </a>
+        <p>传承东北抗联精神<br>吉林革命老区红色助农品牌</p>
+      </div>
+      <div class="footer-col">
+        <h4>探索</h4>
+        <a href="products.html">红色产品</a>
+        <a href="honglv.html">助农行动</a>
+        <a href="brand.html">品牌故事</a>
+        <a href="xiaoshan.html">AI小膳</a>
+      </div>
+      <div class="footer-col">
+        <h4>服务</h4>
+        <a href="contact.html">联系我们</a>
+        <a href="#">合作咨询</a>
+      </div>
+      <div class="footer-col">
+        <h4>关注</h4>
+        <a href="#">微信公众号</a>
+        <a href="#">小红书</a>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span>© 2025 吉养未来 · 吉林革命老区红色助农品牌</span>
+        <span class="footer-disclaimer">普通预包装食品，不能代替药品</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/global.js"></script>
+  <script>
+    /* === Brand Finale: Scroll Reveal + Particles === */
+    (function () {
+      var finale = document.getElementById('finale');
+      if (!finale) return;
+
+      // Scroll-triggered reveal
+      var left = document.getElementById('finaleLeft');
+      var right = document.getElementById('finaleRight');
+      var revealed = false;
+
+      function checkReveal() {
+        if (revealed) return;
+        var rect = finale.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.75) {
+          revealed = true;
+          if (left) left.classList.add('revealed');
+          if (right) right.classList.add('revealed');
+        }
+      }
+
+      window.addEventListener('scroll', checkReveal, { passive: true });
+      setTimeout(checkReveal, 500);
+
+      // Finale gold particles — 更少更小更高级
+      var canvas = document.getElementById('finaleParticles');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var particles = [];
+      var maxP = 20;
+
+      function resize() {
+        var rect = finale.getBoundingClientRect();
+        canvas.width = finale.offsetWidth;
+        canvas.height = finale.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      function createParticle() {
+        return {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 1.4 + 0.4,
+          speedX: (Math.random() - 0.5) * 0.15,
+          speedY: -(Math.random() * 0.25 + 0.06),
+          opacity: Math.random() * 0.4 + 0.08,
+          life: Math.random() * 250 + 120,
+          age: 0
+        };
+      }
+
+      for (var i = 0; i < maxP; i++) {
+        var p = createParticle();
+        p.age = Math.random() * p.life;
+        p.y = Math.random() * canvas.height;
+        particles.push(p);
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = particles.length - 1; i >= 0; i--) {
+          var p = particles[i];
+          p.x += p.speedX + Math.sin(p.age * 0.015) * 0.1;
+          p.y += p.speedY;
+          p.age++;
+
+          if (p.age > p.life || p.y < -10) {
+            particles[i] = createParticle();
+            p = particles[i];
+          }
+
+          var alpha = p.opacity * (1 - p.age / p.life);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(212,166,58,' + alpha.toFixed(2) + ')';
+          ctx.fill();
+        }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+</body>
+</html>

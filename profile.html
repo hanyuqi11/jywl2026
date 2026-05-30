@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="吉养未来个人中心 - 管理您的账户和营养偏好。">
+  <title>个人中心 · 吉养未来</title>
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+
+    .profile-sidebar {
+      background: var(--color-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: var(--space-2xl) var(--space-lg);
+      text-align: center;
+      position: sticky;
+      top: calc(var(--nav-height) + var(--space-xl));
+    }
+
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--space-md);
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-green-100), var(--color-gold-100));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+    }
+
+    .profile-sidebar h3 {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .profile-sidebar .member-since {
+      font-size: 0.8rem;
+      color: var(--color-text-tertiary);
+      margin-bottom: var(--space-xl);
+    }
+
+    .profile-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      text-align: left;
+    }
+
+    .profile-menu a {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      transition: all var(--duration-fast);
+    }
+
+    .profile-menu a:hover,
+    .profile-menu a.active {
+      background: var(--color-green-50);
+      color: var(--color-green-700);
+    }
+
+    .profile-menu .menu-icon {
+      font-size: 1.1rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .profile-main {
+      background: var(--color-card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .profile-tab-header {
+      padding: var(--space-xl) var(--space-2xl);
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .profile-tab-header h2 {
+      font-size: 1.3rem;
+      margin-bottom: var(--space-xs);
+    }
+
+    .profile-tab-header p {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+    }
+
+    /* Order Cards */
+    .order-list {
+      padding: var(--space-xl);
+    }
+
+    .order-card {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    .order-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .order-id {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+    }
+
+    .order-status {
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .status-shipped { background: var(--color-green-50); color: var(--color-green-700); }
+    .status-pending { background: var(--color-gold-100); color: var(--color-gold-700); }
+    .status-completed { background: var(--color-bg-alt); color: var(--color-text-secondary); }
+
+    .order-products {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-md);
+    }
+
+    .order-product {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .order-product-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .order-product-icon.green { background: var(--color-green-50); }
+    .order-product-icon.gold { background: var(--color-gold-100); }
+
+    .order-product h4 {
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+    }
+
+    .order-product span {
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+    }
+
+    .order-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .order-total {
+      font-weight: 700;
+      color: var(--color-red-600);
+    }
+
+    /* Favorites */
+    .favorites-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-md);
+      padding: var(--space-xl);
+    }
+
+    .favorite-card {
+      padding: var(--space-lg);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      text-align: center;
+      transition: all var(--duration-fast);
+    }
+
+    .favorite-card:hover {
+      border-color: var(--color-green-200);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .favorite-card .fav-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .favorite-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Preferences */
+    .preferences-form {
+      padding: var(--space-xl);
+    }
+
+    .pref-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+
+    .pref-tags {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .pref-tag {
+      padding: 6px 16px;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all var(--duration-fast);
+      background: var(--color-card);
+    }
+
+    .pref-tag:hover {
+      border-color: var(--color-green-400);
+    }
+
+    .pref-tag.selected {
+      background: var(--color-green-50);
+      border-color: var(--color-green-500);
+      color: var(--color-green-700);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: var(--space-4xl) var(--space-xl);
+    }
+
+    .empty-state .empty-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .empty-state h3 {
+      font-size: 1.1rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .empty-state p {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-lg);
+    }
+
+    @media (max-width: 768px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-sidebar {
+        position: static;
+      }
+
+      .pref-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">
+          <img src="https://s41.ax1x.com/2026/05/25/pmCfaZ9.png" alt="吉养未来" onerror="this.style.display='none';this.parentElement.textContent='吉';">
+        </span>
+        吉养未来
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="products.html" class="nav-link">红色产品</a>
+        <a href="honglv.html" class="nav-link">助农行动</a>
+        <a href="brand.html" class="nav-link">品牌故事</a>
+        <a href="xiaoshan.html" class="nav-link">AI小膳</a>
+        <a href="contact.html" class="nav-link">联系我们</a>
+      </div>
+      <a href="products.html" class="nav-cta">支持老区助农</a>
+      <button class="nav-toggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-wrapper-inner">
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="breadcrumb">
+        <a href="index.html">首页</a><span class="sep">›</span><span>个人中心</span>
+      </div>
+      <h1>个人中心</h1>
+      <p>管理您的账户和营养偏好</p>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <div class="profile-layout">
+          <!-- Sidebar -->
+          <aside class="profile-sidebar">
+            <div class="profile-avatar">👤</div>
+            <h3>吉养用户</h3>
+            <p class="member-since">会员 · 2025年加入</p>
+            <nav class="profile-menu">
+              <a href="#" class="active" data-tab="orders">
+                <span class="menu-icon">📮</span> 品牌订阅
+              </a>
+              <a href="#" data-tab="favorites">
+                <span class="menu-icon">❤️</span> 我的收藏
+              </a>
+              <a href="#" data-tab="preferences">
+                <span class="menu-icon">⚙️</span> 偏好设置
+              </a>
+              <a href="#" data-tab="points">
+                <span class="menu-icon">🎁</span> 积分与优惠
+              </a>
+            </nav>
+          </aside>
+
+          <!-- Main Content -->
+          <main class="profile-main">
+            <!-- Orders Tab -->
+            <div id="tab-orders" class="profile-tab-content">
+              <div class="profile-tab-header">
+                <h2>品牌订阅</h2>
+                <p>关注吉养未来最新动态</p>
+              </div>
+              <div style="text-align:center;padding:60px 20px;color:var(--color-text-secondary);">
+                <div style="font-size:3rem;margin-bottom:16px;">📮</div>
+                <p style="font-size:1.05rem;color:var(--color-text);">订阅品牌通讯</p>
+                <p style="margin-bottom:24px;">第一时间获取新品发布、助农故事和品牌活动信息</p>
+                <a href="contact.html" class="btn btn-primary">联系我们订阅</a>
+              </div>
+            </div>
+
+            <!-- Favorites Tab (hidden by default) -->
+            <div id="tab-favorites" class="profile-tab-content" style="display: none;">
+              <div class="profile-tab-header">
+                <h2>我的收藏</h2>
+                <p>您收藏的产品和内容</p>
+              </div>
+              <div class="favorites-grid">
+                <div class="favorite-card">
+                  <div class="fav-icon">🥬</div>
+                  <h4>抗联野菜脆棒</h4>
+                  <a href="products.html" class="btn btn-outline btn-sm">了解详情</a>
+                </div>
+                <div class="favorite-card">
+                  <div class="fav-icon">🌽</div>
+                  <h4>红粮玉米杂粮杯</h4>
+                  <a href="products.html" class="btn btn-outline btn-sm">了解详情</a>
+                </div>
+                <div class="favorite-card">
+                  <div class="fav-icon">🥜</div>
+                  <h4>黑土荞麦脆片</h4>
+                  <a href="products.html" class="btn btn-outline btn-sm">了解详情</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Preferences Tab -->
+            <div id="tab-preferences" class="profile-tab-content" style="display: none;">
+              <div class="profile-tab-header">
+                <h2>偏好设置</h2>
+                <p>设置您的饮食偏好，获得更精准的产品推荐</p>
+              </div>
+              <div class="preferences-form">
+                <div class="pref-grid">
+                  <div class="form-group">
+                    <label class="form-label">饮食偏好</label>
+                    <div class="pref-tags">
+                      <span class="pref-tag">低糖</span>
+                      <span class="pref-tag selected">高纤维</span>
+                      <span class="pref-tag">高蛋白</span>
+                      <span class="pref-tag">低脂</span>
+                      <span class="pref-tag selected">天然食材</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">感兴趣的产品类型</label>
+                    <div class="pref-tags">
+                      <span class="pref-tag selected">零食</span>
+                      <span class="pref-tag selected">代餐</span>
+                      <span class="pref-tag">轻食</span>
+                      <span class="pref-tag">冲饮</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">昵称</label>
+                    <input type="text" class="form-input" value="吉养用户" placeholder="输入昵称">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">手机号</label>
+                    <input type="text" class="form-input" value="138****8888" placeholder="输入手机号">
+                  </div>
+                </div>
+                <button class="btn btn-primary">保存设置</button>
+              </div>
+            </div>
+
+            <!-- Points Tab -->
+            <div id="tab-points" class="profile-tab-content" style="display: none;">
+              <div class="profile-tab-header">
+                <h2>积分与优惠</h2>
+                <p>查看您的积分余额和可用优惠</p>
+              </div>
+              <div class="empty-state">
+                <div class="empty-icon">🎁</div>
+                <h3>即将上线</h3>
+                <p>积分商城和会员优惠功能正在筹备中，敬请期待</p>
+                <a href="products.html" class="btn btn-primary">逛逛产品中心</a>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <span class="logo-icon">吉</span>
+          吉养未来
+        </a>
+        <p>传承东北抗联精神<br>吉林革命老区红色助农食品品牌</p>
+      </div>
+      <div class="footer-col">
+        <h4>探索</h4>
+        <a href="products.html">红色产品</a>
+        <a href="honglv.html">助农行动</a>
+        <a href="brand.html">品牌故事</a>
+        <a href="xiaoshan.html">AI小膳</a>
+      </div>
+      <div class="footer-col">
+        <h4>服务</h4>
+        <a href="contact.html">联系我们</a>
+        <a href="#">合作咨询</a>
+      </div>
+      <div class="footer-col">
+        <h4>关注</h4>
+        <a href="#">微信公众号</a>
+        <a href="#">小红书</a>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span>© 2025 吉养未来 · 吉林革命老区红色助农品牌</span>
+        <span class="footer-disclaimer">普通预包装食品，不能代替药品</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/global.js"></script>
+  <script>
+    // Tab switching
+    document.querySelectorAll('.profile-menu a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Update active menu item
+        document.querySelectorAll('.profile-menu a').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        // Show corresponding tab
+        const tabId = this.getAttribute('data-tab');
+        document.querySelectorAll('.profile-tab-content').forEach(tab => tab.style.display = 'none');
+        document.getElementById('tab-' + tabId).style.display = 'block';
+      });
+    });
+
+    // Preference tag toggle
+    document.querySelectorAll('.pref-tag').forEach(tag => {
+      tag.addEventListener('click', function() {
+        this.classList.toggle('selected');
+      });
+    });
+  </script>
+</body>
+</html>

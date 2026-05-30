@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="吉养未来助农行动 - 医学生青年团队深耕吉林革命老区，走进白山市、通化市，以青年之力传承抗联精神，以食品创新助力乡村振兴。">
+  <title>助农行动 · 吉养未来</title>
+  <link rel="stylesheet" href="css/global.css">
+  <style>
+    .action-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(58, 16, 16, 0.05) 0%, rgba(26, 5, 8, 0.15) 50%, rgba(10, 2, 3, 0.3) 100%),
+        url('https://s41.ax1x.com/2026/05/25/pmCh1wd.png') center/cover no-repeat;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .action-hero::before {
+      content: '';
+      position: absolute;
+      top: -10%; left: -5%;
+      width: 50%; height: 120%;
+      background: radial-gradient(ellipse at center, rgba(212,175,55,0.1), transparent);
+      pointer-events: none;
+    }
+    .action-hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      padding: var(--space-4xl) var(--space-xl);
+    }
+    .action-hero-inner h1 {
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+      margin-bottom: var(--space-md);
+    }
+    .action-hero-inner .subtitle {
+      color: var(--color-gold);
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      margin-bottom: var(--space-lg);
+    }
+    .action-hero-inner p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .timeline-section {
+      background: var(--color-bg);
+    }
+    .timeline {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      padding-left: 40px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 18px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--color-red), var(--color-gold));
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: var(--space-2xl);
+      padding-left: var(--space-xl);
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 8px;
+      width: 14px;
+      height: 14px;
+      background: var(--color-red);
+      border: 3px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px var(--color-red);
+    }
+    .timeline-item h3 {
+      color: var(--color-red);
+      margin-bottom: var(--space-sm);
+      font-size: 1.1rem;
+    }
+    .timeline-item p {
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .timeline-item .location {
+      font-size: 0.8rem;
+      color: var(--color-gold-dark);
+      font-weight: 600;
+      margin-bottom: var(--space-xs);
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-xl);
+    }
+    .impact-card {
+      background: var(--color-card);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--duration-normal);
+    }
+    .impact-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+    .impact-card .num {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--color-red);
+      margin-bottom: var(--space-sm);
+    }
+    .impact-card h4 {
+      font-size: 1rem;
+      margin-bottom: var(--space-sm);
+    }
+    .impact-card p {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .timeline {
+        padding-left: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">
+          <img src="https://s41.ax1x.com/2026/05/25/pmCfaZ9.png" alt="吉养未来" onerror="this.style.display='none';this.parentElement.textContent='吉';">
+        </span>
+        吉养未来
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="products.html" class="nav-link">红色产品</a>
+        <a href="honglv.html" class="nav-link active">助农行动</a>
+        <a href="brand.html" class="nav-link">品牌故事</a>
+        <a href="xiaoshan.html" class="nav-link">AI小膳</a>
+        <a href="contact.html" class="nav-link">联系我们</a>
+      </div>
+      <a href="products.html" class="nav-cta">支持老区助农</a>
+      <button class="nav-toggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="action-hero">
+    <div class="action-hero-inner">
+      <span class="subtitle">把青春写进黑土地</span>
+      <h1>助农行动</h1>
+      <p>医学生青年团队走进吉林革命老区，深入白山市、通化市等东北抗联战斗过的地方，走访合作社、调研特色农产品，以专业知识赋能老区食品产业创新，让好食材走出深山，让好日子有奔头。</p>
+    </div>
+  </section>
+
+  <!-- 实践足迹 -->
+  <section class="section timeline-section">
+    <div class="section-inner-narrow">
+      <div class="section-header reveal">
+        <span class="text-eyebrow">实践足迹</span>
+        <h2>从课堂到田野，从书本到乡村</h2>
+        <p class="section-subtitle">深入革命老区的每一次走访，都是对"把青春写进黑土地"最真切的践行</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="location">📍 吉林省白山市</div>
+          <h3>东北抗联纪念馆学习</h3>
+          <p>走进杨靖宇将军殉国地，学习东北抗联艰苦卓绝的斗争历史，感悟坚定信念、百折不挠的抗联精神。</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="location">📍 吉林省通化市</div>
+          <h3>合作社实地走访</h3>
+          <p>走访当地鲜食玉米、山野菜种植合作社，了解农产品生产现状、销售渠道与农户面临的困难，为后续订单化采购打下基础。</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="location">📍 长白山腹地</div>
+          <h3>特色食材调研</h3>
+          <p>深入长白山地区，调研蓝莓、黑木耳、荞麦等吉林特色农产品的种植环境和品质特征，筛选适合深加工的优质原料。</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="location">📍 长春研发中心</div>
+          <h3>产品研发与测试</h3>
+          <p>依托现代食品科技，对调研带回的原料进行低温烘焙、冻干锁鲜等工艺测试，开发出四款兼具营养与风味的健康食品。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 助农成效 -->
+  <section class="section" style="background: var(--color-bg-alt);">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="text-eyebrow">助农成效</span>
+        <h2>每一份产品，都是对老区的承诺</h2>
+      </div>
+      <div class="impact-grid">
+        <div class="impact-card reveal">
+          <div class="num" data-count="20">20</div>
+          <h4>合作社及农户</h4>
+          <p>已与吉林省内20余家合作社及农户建立联系与合作意向</p>
+        </div>
+        <div class="impact-card reveal">
+          <div class="num" data-count="15">15</div>
+          <h4>年订单采购（吨）</h4>
+          <p>预计稳定运营后年采购鲜食玉米、山野菜等特色农产品</p>
+        </div>
+        <div class="impact-card reveal">
+          <div class="num" data-count="4">4</div>
+          <h4>核心产品线</h4>
+          <p>围绕吉林特色食材开发了四款高附加值健康食品</p>
+        </div>
+        <div class="impact-card reveal">
+          <div class="num" data-count="100">100%</div>
+          <h4>老区原料直供</h4>
+          <p>全部核心原料均源自吉林革命老区，确保品质可追溯</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background: var(--color-bg);">
+    <div class="section-inner reveal">
+      <div class="cta-banner">
+        <h2>一起助力革命老区振兴</h2>
+        <p>关注吉养未来，支持红色助农。让每一次消费都成为推动乡村振兴的力量。</p>
+        <a href="products.html" class="btn btn-gold btn-lg">探索红色产品</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <span class="logo-icon">
+            <img src="https://s41.ax1x.com/2026/05/25/pmCfaZ9.png" alt="吉养未来" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none';this.parentElement.textContent='吉';">
+          </span>
+          吉养未来
+        </a>
+        <p>传承东北抗联精神<br>吉林革命老区红色助农品牌</p>
+      </div>
+      <div class="footer-col">
+        <h4>探索</h4>
+        <a href="products.html">红色产品</a>
+        <a href="honglv.html">助农行动</a>
+        <a href="brand.html">品牌故事</a>
+        <a href="xiaoshan.html">AI小膳</a>
+      </div>
+      <div class="footer-col">
+        <h4>服务</h4>
+        <a href="contact.html">联系我们</a>
+        <a href="#">合作咨询</a>
+      </div>
+      <div class="footer-col">
+        <h4>关注</h4>
+        <a href="#">微信公众号</a>
+        <a href="#">小红书</a>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <span>© 2025 吉养未来 · 吉林革命老区红色助农品牌</span>
+        <span class="footer-disclaimer">普通预包装食品，不能代替药品</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/global.js"></script>
+</body>
+</html>
