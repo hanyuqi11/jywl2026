@@ -7,13 +7,22 @@
   <title>AI智能体小膳 · 吉养未来</title>
   <link rel="stylesheet" href="css/global.css">
   <style>
+    :root {
+      --color-green-50: #E8F5E9;
+      --color-green-100: #C8E6C9;
+      --color-green-200: #A5D6A7;
+      --color-green-400: #66BB6A;
+      --color-green-500: #43A047;
+      --color-green-600: #2E7D32;
+      --color-green-700: #1B5E20;
+      --color-green-800: #144A17;
+    }
+
     .xiaoshan-hero {
       text-align: center;
       padding: calc(var(--nav-height) + var(--space-5xl)) var(--space-xl) var(--space-3xl);
-      background:
-        radial-gradient(ellipse at 50% 30%, rgba(58, 16, 16, 0.05) 0%, rgba(26, 5, 8, 0.15) 50%, rgba(10, 2, 3, 0.3) 100%),
-        url('../images/hero-bg.png') center/cover no-repeat;
-      color: #fff;
+      background: url('images/小膳背景.png') center/cover no-repeat;
+      color: #3A1A18;
     }
 
     .xiaoshan-avatar {
@@ -75,7 +84,7 @@
       flex-direction: column;
       gap: var(--space-md);
       min-height: 300px;
-      background: var(--color-bg-alt);
+      background: linear-gradient(180deg, rgba(122,0,18,0.04) 0%, rgba(248,244,238,0.9) 100%);
     }
 
     .chat-msg {
@@ -89,9 +98,10 @@
 
     .chat-msg.bot {
       align-self: flex-start;
-      background: var(--color-card);
+      background: rgba(255,255,255,0.85);
+      color: #2D1A12;
       border-bottom-left-radius: 4px;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 2px 12px rgba(122,0,18,0.08);
     }
 
     .chat-msg.user {
@@ -400,6 +410,49 @@
     .dot.green { background: var(--color-green-500); }
     .dot.gold { background: var(--color-gold-500); }
     .dot.red { background: var(--color-red-500); }
+
+    /* ===== 聊天功能样式 ===== */
+    .chat-messages-container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      min-height: 260px;
+      max-height: 420px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+    .chat-messages-container::-webkit-scrollbar { width: 4px; }
+    .chat-messages-container::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 4px; }
+
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 0;
+    }
+    .typing-indicator span {
+      width: 6px; height: 6px;
+      background: #999;
+      border-radius: 50%;
+      animation: typingBounce 1.4s infinite;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-6px); opacity: 1; }
+    }
+
+    .chat-input-area .chat-input:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* CTA Banner 居中 */
+    .cta-banner {
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -409,7 +462,7 @@
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
         <span class="logo-icon">
-          <img src="images/logo.jpg" alt="吉养未来" onerror="this.style.display='none';this.parentElement.textContent='吉';">
+          <img src="images/logo.png" alt="吉养未来" onerror="this.style.display='none';this.parentElement.textContent='吉';">
         </span>
         吉养未来
       </a>
@@ -433,56 +486,41 @@
     <!-- Hero -->
     <section class="xiaoshan-hero">
       <div class="section-inner-narrow">
-        <div class="xiaoshan-avatar">🤖</div>
-        <span class="text-eyebrow" style="display: block; margin-bottom: var(--space-sm); color: var(--color-gold);">AI 智能助手</span>
-        <h1 style="color: #fff; margin-bottom: var(--space-md); text-shadow: 0 2px 20px rgba(0,0,0,0.4);">你好，我是小膳</h1>
-        <p class="text-body-lg" style="color: rgba(255,255,255,0.75);">
+        <div class="xiaoshan-avatar"><img src="images/小膳.jpg" alt="AI小膳" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+        <span class="text-eyebrow" style="display: block; margin-bottom: var(--space-sm); color: #8B6914;">AI 智能助手</span>
+        <h1 style="color: #3A1A18; margin-bottom: var(--space-md);">你好，我是小膳</h1>
+        <p class="text-body-lg" style="color: #5A2D1A;">
           基于大模型开发的智能营养科普助手。我可以帮你查询食品营养知识、了解合理膳食搭配、探索吉林特色食材，让健康饮食变得智能、简单、有趣。
         </p>
 
         <!-- Chat Demo -->
         <div class="chat-demo reveal">
           <div class="chat-header">
-            <div class="chat-header-avatar">🤖</div>
+            <div class="chat-header-avatar"><img src="images/小膳.jpg" alt="AI小膳" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
             <div class="chat-header-text">
               <h4>小膳 · AI营养助手</h4>
-              <span>在线 · 随时为您服务</span>
+              <span>在线 · 豆包大模型驱动</span>
             </div>
           </div>
+
+          <!-- 对话区域 -->
           <div class="chat-body">
-            <div class="chat-msg bot">
-              您好！我是小膳 😊<br>
-              我是吉养未来的AI营养科普助手，可以帮您解答关于食品营养、合理膳食和吉林特色食材的问题。有什么可以帮您的吗？
-            </div>
-            <div class="chat-msg user">
-              长白山蓝莓有什么营养？
-            </div>
-            <div class="chat-msg bot">
-              长白山蓝莓可是好东西！🍇<br><br>
-              长白山高寒地区昼夜温差大，蓝莓的花青素含量比普通蓝莓高出约30%。花青素是强效抗氧化剂，有助于保护视力、延缓衰老。<br><br>
-              此外，蓝莓还富含维生素C、维生素K、锰和膳食纤维，是低热量高营养的超级水果。我们吉养未来的白山蓝莓冻干酸奶块采用冻干锁鲜技术，能最大程度保留这些营养哦！
-            </div>
-            <div class="chat-msg user">
-              那山野菜呢？有什么特别的？
-            </div>
-            <div class="chat-msg bot">
-              长白山山野菜是真正的"山珍"！🌿<br><br>
-              长白山地区的山野菜在无污染的自然环境中生长，富含多种微量元素和膳食纤维。比如常见的蕨菜，富含蛋白质、胡萝卜素和维生素C；刺嫩芽则含有丰富的氨基酸。<br><br>
-              这些山野菜热量低、纤维高、矿物质丰富，是追求健康饮食的理想选择。我们的抗联野菜脆棒采用低温烘焙工艺，保留了山野菜的自然营养和清香口感。
+            <div class="chat-messages-container" id="chatMessages">
+              <!-- 动态填充 -->
             </div>
           </div>
           <div class="chat-input-area">
-            <input type="text" class="chat-input" placeholder="输入您的问题，了解营养知识..." value="吉林玉米有什么营养特点？">
-            <button class="chat-send">➤</button>
+            <input type="text" class="chat-input" id="chatInput" placeholder="输入您的问题，了解营养知识..." onkeydown="if(event.key==='Enter')sendMessage()">
+            <button class="chat-send" onclick="sendMessage()" id="sendBtn">➤</button>
           </div>
         </div>
 
         <!-- Quick Ask -->
         <div class="demo-quick-asks" style="max-width: 650px; margin: var(--space-lg) auto 0; justify-content: center;">
-          <button class="quick-ask" onclick="openAIModal('黑木耳的营养价值')">🍄 黑木耳的营养价值</button>
-          <button class="quick-ask" onclick="openAIModal('粗粮怎么搭配最健康')">🌽 粗粮怎么搭配最健康</button>
-          <button class="quick-ask" onclick="openAIModal('蓝莓一天吃多少合适')">🫐 蓝莓一天吃多少合适</button>
-          <button class="quick-ask" onclick="openAIModal('山野菜的食用注意事项')">🥬 山野菜的食用注意事项</button>
+          <button class="quick-ask" onclick="sendPresetMessage('黑木耳的营养价值')">🍄 黑木耳的营养价值</button>
+          <button class="quick-ask" onclick="sendPresetMessage('粗粮怎么搭配最健康')">🌽 粗粮怎么搭配最健康</button>
+          <button class="quick-ask" onclick="sendPresetMessage('蓝莓一天吃多少合适')">🫐 蓝莓一天吃多少合适</button>
+          <button class="quick-ask" onclick="sendPresetMessage('山野菜的食用注意事项')">🥬 山野菜的食用注意事项</button>
         </div>
 
         <!-- 立即对话入口 -->
@@ -500,7 +538,7 @@
       <div class="ai-modal-box">
         <div class="ai-modal-header">
           <div class="ai-modal-header-left">
-            <div class="avatar">🤖</div>
+            <div class="avatar"><img src="images/小膳.jpg" alt="AI小膳" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
             小膳 · AI营养助手
             <span style="font-size:0.75rem;opacity:0.7;font-weight:400;margin-left:4px;">由豆包大模型驱动</span>
           </div>
@@ -516,7 +554,7 @@
           <iframe id="aiFrame" src="" title="小膳AI助手" allow="microphone" onload="handleFrameLoad()" onerror="handleFrameError()"></iframe>
           <!-- 备用界面（iframe 被拦截时显示） -->
           <div class="ai-modal-fallback" id="aiFrameFallback">
-            <div class="fallback-icon">🤖</div>
+            <div class="fallback-icon"><img src="images/小膳.jpg" alt="AI小膳" style="width:80px;height:80px;object-fit:cover;border-radius:50%;"></div>
             <h3>小膳已准备好为您服务</h3>
             <p>受浏览器安全策略限制，AI小膳需要在新窗口中与您对话，点击下方按钮即可开始。</p>
             <a href="https://doubao.com/bot/2tExxbEy" target="_blank" class="open-btn">
@@ -639,7 +677,187 @@
   </footer>
 
   <script>
+    // ==================== 配置 ====================
+    // 🔧 部署 Worker 后，把下面这个 URL 替换成你的 Worker 地址
+    const PROXY_URL = 'https://YOUR_WORKER.workers.dev';
     const DOUBAO_URL = 'https://doubao.com/bot/2tExxbEy';
+
+    // 对话历史（内存中维护）
+    let chatHistory = [];
+    let isWaiting = false;
+
+    // 系统提示词
+    const SYSTEM_PROMPT = `你是"小膳"，吉养未来品牌的AI营养科普助手。你专注于食品营养知识、合理膳食搭配和吉林特色农产品科普。
+
+品牌背景：吉养未来是吉林革命老区红色助农食品品牌，产品线包括红粮玉米杂粮杯、抗联野菜脆棒、黑土荞麦脆片、白山蓝莓冻干酸奶块等。
+
+回答要求：
+- 亲切、专业、简洁，像朋友一样交流
+- 适当使用emoji让对话生动
+- 回答控制在200字以内
+- 涉及产品时自然提及吉养未来
+- 不了解的问题诚实告知，引导咨询专业营养师
+- 所有产品均为普通预包装食品，不能代替药品
+
+与你对话的用户可能对营养学了解有限，请用通俗易懂的语言解释。`;
+
+    // ==================== 初始欢迎消息 ====================
+    const WELCOME_MESSAGES = [
+      { role: 'assistant', content: '您好！我是小膳 😊\n我是吉养未来的AI营养科普助手，可以帮您解答关于食品营养、合理膳食和吉林特色食材的问题。有什么可以帮您的吗？' },
+      { role: 'user', content: '长白山蓝莓有什么营养？' },
+      { role: 'assistant', content: '长白山蓝莓可是好东西！🍇\n\n长白山高寒地区昼夜温差大，蓝莓的花青素含量比普通蓝莓高出约30%。花青素是强效抗氧化剂，有助于保护视力、延缓衰老。\n\n此外，蓝莓还富含维生素C、维生素K、锰和膳食纤维，是低热量高营养的超级水果。我们吉养未来的白山蓝莓冻干酸奶块采用冻干锁鲜技术，能最大程度保留这些营养哦！' },
+      { role: 'user', content: '那山野菜呢？有什么特别的？' },
+      { role: 'assistant', content: '长白山山野菜是真正的"山珍"！🌿\n\n长白山地区的山野菜在无污染的自然环境中生长，富含多种微量元素和膳食纤维。比如常见的蕨菜，富含蛋白质、胡萝卜素和维生素C；刺嫩芽则含有丰富的氨基酸。\n\n这些山野菜热量低、纤维高、矿物质丰富，是追求健康饮食的理想选择。我们的抗联野菜脆棒采用低温烘焙工艺，保留了山野菜的自然营养和清香口感。' },
+    ];
+
+    // ==================== 初始化 ====================
+    function initChat() {
+      const container = document.getElementById('chatMessages');
+      container.innerHTML = '';
+      chatHistory = [];
+      WELCOME_MESSAGES.forEach(msg => {
+        renderMessage(msg.role, msg.content);
+        chatHistory.push({ role: msg.role, content: msg.content });
+      });
+      scrollToBottom();
+    }
+
+    function renderMessage(role, content, id) {
+      const container = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = 'chat-msg ' + (role === 'user' ? 'user' : 'bot');
+      if (id) div.id = id;
+      div.innerHTML = content.replace(/\n/g, '<br>');
+      container.appendChild(div);
+      scrollToBottom();
+    }
+
+    function updateMessage(id, content) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.innerHTML = content.replace(/\n/g, '<br>');
+        scrollToBottom();
+      }
+    }
+
+    function scrollToBottom() {
+      const container = document.getElementById('chatMessages');
+      setTimeout(() => { container.scrollTop = container.scrollHeight; }, 50);
+    }
+
+    // ==================== 发送消息 ====================
+    async function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text || isWaiting) return;
+
+      // 如果代理还没配置，走 iframe 备用
+      if (PROXY_URL.includes('YOUR_WORKER')) {
+        openAIModal(text);
+        return;
+      }
+
+      input.value = '';
+      input.disabled = true;
+      isWaiting = true;
+      document.getElementById('sendBtn').style.opacity = '0.5';
+
+      renderMessage('user', text);
+      chatHistory.push({ role: 'user', content: text });
+
+      const loadingId = 'loading-' + Date.now();
+      const container = document.getElementById('chatMessages');
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'chat-msg bot';
+      loadingDiv.id = loadingId;
+      loadingDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+      container.appendChild(loadingDiv);
+      scrollToBottom();
+
+      const botMsgId = 'bot-' + Date.now();
+      let fullResponse = '';
+
+      try {
+        await callDoubaoAPI((chunk) => {
+          fullResponse += chunk;
+          const loadEl = document.getElementById(loadingId);
+          if (loadEl) loadEl.remove();
+          const botEl = document.getElementById(botMsgId);
+          if (!botEl) {
+            renderMessage('assistant', fullResponse, botMsgId);
+          } else {
+            updateMessage(botMsgId, fullResponse);
+          }
+        });
+      } catch (err) {
+        const loadEl = document.getElementById(loadingId);
+        if (loadEl) loadEl.remove();
+        const errMsg = err.message.includes('Failed to fetch')
+          ? '😥 服务暂时不可用，请稍后重试。\n\n如需立即对话，可以<a href="' + DOUBAO_URL + '" target="_blank" style="color:#B30018;text-decoration:underline;">点击这里在豆包中打开</a>'
+          : '😥 ' + err.message;
+        renderMessage('assistant', errMsg);
+      }
+
+      if (fullResponse) {
+        chatHistory.push({ role: 'assistant', content: fullResponse });
+      }
+
+      input.disabled = false;
+      isWaiting = false;
+      document.getElementById('sendBtn').style.opacity = '1';
+      input.focus();
+    }
+
+    async function callDoubaoAPI(onChunk) {
+      const messages = [
+        { role: 'system', content: SYSTEM_PROMPT },
+        ...chatHistory.slice(-10),
+      ];
+
+      const response = await fetch(PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: messages }),
+      });
+
+      if (!response.ok) {
+        let errText = '';
+        try { errText = (await response.json()).error || ''; } catch(e) {}
+        throw new Error(errText || '服务响应异常 (HTTP ' + response.status + ')');
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.slice(6).trim();
+            if (data === '[DONE]') return;
+            try {
+              const json = JSON.parse(data);
+              const content = json.choices?.[0]?.delta?.content;
+              if (content) onChunk(content);
+            } catch(e) {}
+          }
+        }
+      }
+    }
+
+    // ==================== 快捷发送 ====================
+    function sendPresetMessage(text) {
+      document.getElementById('chatInput').value = text;
+      sendMessage();
+      document.querySelector('.chat-demo').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ==================== 豆包 iframe 弹窗（Proxy 未部署时的备用方案） ====================
     let frameLoadTimer = null;
 
     function openAIModal(question) {
@@ -647,21 +865,16 @@
       const frame   = document.getElementById('aiFrame');
       const fallback = document.getElementById('aiFrameFallback');
 
-      // 重置状态
       fallback.classList.remove('show');
       frame.style.display = 'block';
 
-      // 构建带预填问题的 URL（豆包支持 query 参数传入问题）
       const url = question
         ? DOUBAO_URL + '?query=' + encodeURIComponent(question)
         : DOUBAO_URL;
 
       frame.src = url;
 
-      // 5 秒内若 iframe 未成功加载则显示备用界面
-      frameLoadTimer = setTimeout(() => {
-        showFallback();
-      }, 5000);
+      frameLoadTimer = setTimeout(() => { showFallback(); }, 5000);
 
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -669,17 +882,10 @@
 
     function handleFrameLoad() {
       clearTimeout(frameLoadTimer);
-      // 尝试访问 contentDocument，若抛出跨域异常说明加载成功但内容被隔离（正常）
       try {
         const doc = document.getElementById('aiFrame').contentDocument;
-        // 若 doc.body 为空（某些浏览器对拦截的 iframe 返回空页面）则显示 fallback
-        if (!doc || !doc.body || doc.body.innerHTML === '') {
-          showFallback();
-        }
-      } catch(e) {
-        // 跨域错误 = iframe 实际上已加载页面内容，不需要 fallback
-        clearTimeout(frameLoadTimer);
-      }
+        if (!doc || !doc.body || doc.body.innerHTML === '') { showFallback(); }
+      } catch(e) { clearTimeout(frameLoadTimer); }
     }
 
     function handleFrameError() {
@@ -704,22 +910,15 @@
     }
 
     function handleOverlayClick(e) {
-      if (e.target === document.getElementById('aiModalOverlay')) {
-        closeAIModal();
-      }
+      if (e.target === document.getElementById('aiModalOverlay')) { closeAIModal(); }
     }
 
-    // ESC 关闭
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeAIModal();
     });
 
-    // 快捷问题点击
-    document.querySelectorAll('.quick-ask').forEach(btn => {
-      if (!btn.hasAttribute('onclick')) {
-        btn.addEventListener('click', () => openAIModal(btn.textContent.replace(/^[^\u4e00-\u9fa5]*/, '').trim()));
-      }
-    });
+    // ==================== 启动 ====================
+    document.addEventListener('DOMContentLoaded', () => { initChat(); });
   </script>
   <script src="js/global.js"></script>
 </body>
