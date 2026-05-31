@@ -7,167 +7,507 @@
   <title>联系我们 · 吉养未来</title>
   <link rel="stylesheet" href="css/global.css">
   <style>
+    /* ===== Contact Hero - 长白山夕阳背景 ===== */
+    .contact-hero {
+      position: relative;
+      min-height: 55vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: radial-gradient(ellipse at 60% 40%, rgba(212, 166, 58, 0.22) 0%, rgba(179, 0, 24, 0.18) 40%, rgba(58, 26, 24, 0.45) 70%, rgba(10, 2, 3, 0.65) 100%),
+                  linear-gradient(135deg, rgba(179, 0, 24, 0.35) 0%, transparent 45%, rgba(58, 26, 24, 0.2) 80%),
+                  url('images/小膳背景.png') center 35%/cover no-repeat;
+      overflow: hidden;
+    }
+
+    /* 暗角 + 柔光 */
+    .contact-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, transparent 40%, rgba(3, 1, 1, 0.55) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 左侧品牌红渐变聚焦 */
+    .contact-hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(179, 0, 24, 0.25), transparent 80%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .contact-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 750px;
+      padding: var(--space-3xl);
+    }
+
+    .contact-hero-badge {
+      display: inline-block;
+      padding: 5px 20px;
+      border: 1px solid rgba(212, 166, 58, 0.5);
+      color: var(--color-gold-300);
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-xl);
+      backdrop-filter: blur(6px);
+      background: rgba(58, 26, 24, 0.3);
+    }
+
+    .contact-hero h1 {
+      color: #fff;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      margin-bottom: var(--space-lg);
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+
+    .contact-hero .hero-subtitle {
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.78);
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ===== 分屏主体 ===== */
+    .contact-main {
+      position: relative;
+      padding: var(--space-4xl) var(--space-xl);
+      background: linear-gradient(180deg, #F8F4EE 0%, #f0ebe0 30%, #F8F4EE 100%);
+    }
+
     .contact-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.05fr 0.95fr;
       gap: var(--space-4xl);
       align-items: start;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
-    .contact-form-section {
-      background: var(--color-card);
-      border-radius: var(--radius-xl);
+    /* ===== 左侧表单 ===== */
+    .form-panel {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius-2xl);
       padding: var(--space-3xl);
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 2px 40px rgba(58, 26, 24, 0.08), 0 0 0 1px rgba(212, 166, 58, 0.08);
     }
 
-    .contact-form-section h2 {
-      margin-bottom: var(--space-sm);
-      font-size: 1.5rem;
+    .form-panel-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
     }
 
-    .contact-form-section .form-desc {
-      color: var(--color-text-secondary);
-      margin-bottom: var(--space-2xl);
-      font-size: 0.95rem;
+    .form-panel-header .form-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: rgba(179, 0, 24, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
-    .form-row {
+    .form-panel-header .form-logo img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .form-panel h2 {
+      font-size: 1.35rem;
+      margin-bottom: 2px;
+      color: var(--color-soil);
+    }
+
+    .form-panel .form-subtitle {
+      font-size: 0.85rem;
+      color: var(--color-text-tertiary);
+    }
+
+    /* 卡片化输入框 */
+    .input-card {
+      margin-bottom: var(--space-lg);
+    }
+
+    .input-card label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-soil);
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .input-card input,
+    .input-card textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid rgba(58, 26, 24, 0.12);
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.7);
+      font-size: 0.92rem;
+      font-family: inherit;
+      color: var(--color-soil);
+      transition: all 0.25s ease;
+      box-shadow: 0 1px 3px rgba(58, 26, 24, 0.04);
+      outline: none;
+    }
+
+    .input-card input:focus,
+    .input-card textarea:focus {
+      border-color: var(--color-gold-500);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(212, 166, 58, 0.1), 0 4px 16px rgba(58, 26, 24, 0.06);
+    }
+
+    .input-card input::placeholder,
+    .input-card textarea::placeholder {
+      color: rgba(58, 26, 24, 0.3);
+    }
+
+    .input-card textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .input-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--space-md);
     }
 
-    .contact-info-sidebar {
+    /* 咨询类型标签 */
+    .inquiry-tags {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .inquiry-tag {
+      padding: 8px 18px;
+      border: 1.5px solid rgba(58, 26, 24, 0.15);
+      border-radius: var(--radius-full);
+      font-size: 0.84rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      background: rgba(255,255,255,0.5);
+      color: var(--color-text-secondary);
+      user-select: none;
+    }
+
+    .inquiry-tag:hover {
+      border-color: var(--color-gold-400);
+      color: var(--color-gold-700);
+    }
+
+    .inquiry-tag.active {
+      border-color: #B30018;
+      background: rgba(179, 0, 24, 0.06);
+      color: #B30018;
+      font-weight: 600;
+    }
+
+    /* 提交按钮 */
+    .btn-submit-contact {
+      width: 100%;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, #C0392B, #B30018);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(179, 0, 24, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-submit-contact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-submit-contact:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(179, 0, 24, 0.4);
+      background: linear-gradient(135deg, #D44333, #C01028);
+    }
+
+    .btn-submit-contact:hover::before {
+      left: 100%;
+    }
+
+    .btn-submit-contact:active {
+      transform: translateY(0);
+    }
+
+    /* ===== 右侧联系信息 ===== */
+    .info-panel {
       display: flex;
       flex-direction: column;
       gap: var(--space-xl);
     }
 
-    .contact-info-card {
-      padding: var(--space-2xl);
-      background: var(--color-card);
+    .info-card {
+      padding: var(--space-xl) var(--space-2xl);
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(12px);
       border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
-      transition: all var(--duration-normal);
+      box-shadow: 0 1px 24px rgba(58, 26, 24, 0.05), 0 0 0 1px rgba(212, 166, 58, 0.06);
+      transition: all 0.3s ease;
     }
 
-    .contact-info-card:hover {
-      box-shadow: var(--shadow-lg);
+    .info-card:hover {
       transform: translateY(-2px);
+      box-shadow: 0 4px 32px rgba(58, 26, 24, 0.1), 0 0 0 1px rgba(212, 166, 58, 0.12);
     }
 
-    .contact-info-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-md);
+    .info-card .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      margin-bottom: var(--space-sm);
+    }
+
+    .info-card .info-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-icon-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
-      margin-bottom: var(--space-md);
+      font-size: 1.1rem;
+      flex-shrink: 0;
     }
 
-    .contact-info-icon.green { background: var(--color-green-50); }
-    .contact-info-icon.gold { background: var(--color-gold-100); }
-    .contact-info-icon.red { background: var(--color-red-50); }
+    .info-icon-circle.map { background: rgba(46, 93, 58, 0.1); }
+    .info-icon-circle.email { background: rgba(212, 166, 58, 0.15); }
+    .info-icon-circle.phone { background: rgba(179, 0, 24, 0.08); }
+    .info-icon-circle.social { background: rgba(58, 26, 24, 0.06); }
 
-    .contact-info-card h4 {
-      font-size: 1rem;
-      margin-bottom: var(--space-xs);
+    .info-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+      color: var(--color-soil);
     }
 
-    .contact-info-card p {
+    .info-card .info-detail {
       font-size: 0.85rem;
       color: var(--color-text-secondary);
       line-height: 1.7;
     }
 
-    .social-links {
+    .info-card .info-detail.clickable {
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .info-card .info-detail.clickable:hover {
+      color: #B30018;
+    }
+
+    .btn-copy {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(212, 166, 58, 0.12);
+      color: var(--color-gold-700);
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      margin-left: var(--space-sm);
+    }
+
+    .btn-copy:hover {
+      background: rgba(212, 166, 58, 0.25);
+    }
+
+    /* 地图占位 */
+    .map-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(46,93,58,0.06), rgba(212,166,58,0.08));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-tertiary);
+      font-size: 0.82rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-placeholder .map-pin {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-sm);
+      animation: mapBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes mapBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .map-placeholder .map-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-soil);
+    }
+
+    .map-placeholder .map-sub {
+      font-size: 0.78rem;
+      color: var(--color-text-tertiary);
+      margin-top: 2px;
+    }
+
+    /* 社交媒体圆形图标 */
+    .social-circles {
       display: flex;
       gap: var(--space-md);
       flex-wrap: wrap;
-      margin-top: var(--space-md);
     }
 
-    .social-link {
-      padding: var(--space-md) var(--space-lg);
-      background: var(--color-card);
-      border-radius: var(--radius-full);
-      font-size: 0.9rem;
-      box-shadow: var(--shadow-sm);
-      transition: all var(--duration-fast);
+    .social-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: var(--space-sm);
-    }
-
-    .social-link:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .faq-section {
-      background: var(--color-bg-alt);
-    }
-
-    .faq-list {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .faq-item {
-      background: var(--color-card);
-      border-radius: var(--radius-md);
-      margin-bottom: var(--space-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: all var(--duration-fast);
-    }
-
-    .faq-question {
-      padding: var(--space-lg) var(--space-xl);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.95rem;
-      user-select: none;
-    }
-
-    .faq-question .faq-toggle {
+      justify-content: center;
       font-size: 1.2rem;
-      transition: transform var(--duration-fast);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 2px 12px rgba(58, 26, 24, 0.06);
+      text-decoration: none;
+      position: relative;
+    }
+
+    .social-circle:hover {
+      transform: translateY(-3px) scale(1.08);
+      box-shadow: 0 6px 24px rgba(58, 26, 24, 0.15);
+    }
+
+    .social-circle.wechat { color: #07C160; }
+    .social-circle.xiaohongshu { color: #FE2C55; }
+    .social-circle.douyin { color: #111; }
+    .social-circle.weibo { color: #E6162D; }
+
+    .social-circle::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
       color: var(--color-text-tertiary);
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
-    .faq-answer {
-      padding: 0 var(--space-xl);
-      max-height: 0;
-      overflow: hidden;
-      transition: all var(--duration-normal) var(--ease-out);
-      font-size: 0.9rem;
-      color: var(--color-text-secondary);
-      line-height: 1.7;
+    .social-circle:hover::after {
+      opacity: 1;
     }
 
-    .faq-item.open .faq-answer {
-      max-height: 200px;
-      padding-bottom: var(--space-lg);
+    /* 光粒子 Canvas */
+    .particles-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .faq-item.open .faq-toggle {
-      transform: rotate(45deg);
+    /* 滚动渐显 */
+    .reveal-contact {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal-contact.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 成功提示 */
+    .toast-contact {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-120px);
+      background: linear-gradient(135deg, #B30018, #C0392B);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.92rem;
+      z-index: 9999;
+      box-shadow: 0 8px 30px rgba(179,0,24,0.35);
+      transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+    .toast-contact.show {
+      transform: translateX(-50%) translateY(0);
     }
 
     @media (max-width: 768px) {
       .contact-layout {
         grid-template-columns: 1fr;
+        gap: var(--space-2xl);
       }
 
-      .form-row {
+      .contact-main {
+        padding: var(--space-3xl) var(--space-md);
+      }
+
+      .form-panel {
+        padding: var(--space-2xl);
+      }
+
+      .input-row {
         grid-template-columns: 1fr;
+      }
+
+      .contact-hero {
+        min-height: 40vh;
       }
     }
   </style>
@@ -190,6 +530,8 @@
         <a href="brand.html" class="nav-link">品牌故事</a>
         <a href="xiaoshan.html" class="nav-link">AI小膳</a>
         <a href="contact.html" class="nav-link active">联系我们</a>
+        <a href="profile.html" class="nav-link">个人中心</a>
+        <a href="javascript:void(0)" class="nav-link" onclick="toggleCart()" id="cartNavLink">🛒 购物车<span class="cart-badge-nav" id="cartBadgeNav">0</span></a>
       </div>
       <a href="products.html" class="nav-cta">支持老区助农</a>
       <button class="nav-toggle" aria-label="菜单">
@@ -198,170 +540,130 @@
     </div>
   </nav>
 
-  <div class="page-wrapper-inner">
-
-    <!-- Page Hero -->
-    <section class="page-hero">
-      <div class="breadcrumb">
-        <a href="index.html">首页</a><span class="sep">›</span><span>联系我们</span>
-      </div>
+  <!-- ===== Hero - 夕阳长白山背景 ===== -->
+  <section class="contact-hero">
+    <div class="contact-hero-inner">
+      <span class="contact-hero-badge">CONTACT US</span>
       <h1>联系我们</h1>
-      <p>无论您是消费者、合作伙伴还是对品牌感兴趣的各界朋友，我们都期待与您交流</p>
-    </section>
+      <p class="hero-subtitle">
+        欢迎各界朋友与我们交流，共同助力吉林好物与乡村振兴
+      </p>
+    </div>
+  </section>
 
-    <section class="section">
-      <div class="section-inner">
-        <div class="contact-layout">
-          <!-- Contact Form -->
-          <div class="contact-form-section reveal">
+  <!-- ===== 分屏主体 ===== -->
+  <section class="contact-main">
+    <!-- 光粒子 -->
+    <canvas id="contactParticles" class="particles-canvas"></canvas>
+
+    <div class="contact-layout">
+      <!-- 左侧：表单 -->
+      <div class="form-panel reveal-contact" id="formPanel">
+        <div class="form-panel-header">
+          <div class="form-logo">
+            <img src="images/logo.png" alt="吉养未来" onerror="this.parentElement.style.display='none'">
+          </div>
+          <div>
             <h2>发送消息</h2>
-            <p class="form-desc">填写以下表单，我们会在1-2个工作日内回复您</p>
-            <form>
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label">姓名</label>
-                  <input type="text" class="form-input" placeholder="请输入姓名">
-                </div>
-                <div class="form-group">
-                  <label class="form-label">手机号</label>
-                  <input type="text" class="form-input" placeholder="请输入手机号">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">邮箱</label>
-                <input type="email" class="form-input" placeholder="请输入邮箱地址">
-              </div>
-              <div class="form-group">
-                <label class="form-label">咨询类型</label>
-                <div class="pref-tags" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
-                  <span class="pref-tag selected" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1.5px solid var(--color-green-500); background: var(--color-green-50); color: var(--color-green-700); font-size: 0.85rem; cursor: pointer;">产品咨询</span>
-                  <span class="pref-tag" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1.5px solid var(--color-border); font-size: 0.85rem; cursor: pointer;">商务合作</span>
-                  <span class="pref-tag" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1.5px solid var(--color-border); font-size: 0.85rem; cursor: pointer;">媒体联系</span>
-                  <span class="pref-tag" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1.5px solid var(--color-border); font-size: 0.85rem; cursor: pointer;">其他</span>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">留言内容</label>
-                <textarea class="form-input form-textarea" placeholder="请输入您想了解的内容或合作意向…"></textarea>
-              </div>
-              <button type="button" class="btn btn-primary btn-lg" onclick="alert('感谢您的留言！我们会尽快回复。')">发送留言</button>
-            </form>
+            <p class="form-subtitle">我们会在1-2个工作日内回复您</p>
+          </div>
+        </div>
+
+        <form id="contactForm" onsubmit="return handleContactSubmit(event)">
+          <div class="input-row">
+            <div class="input-card">
+              <label>您的姓名</label>
+              <input type="text" placeholder="请输入您的姓名" required>
+            </div>
+            <div class="input-card">
+              <label>邮箱地址</label>
+              <input type="email" placeholder="your@email.com" required>
+            </div>
           </div>
 
-          <!-- Contact Info Sidebar -->
-          <div class="contact-info-sidebar reveal">
-            <div class="contact-info-card">
-              <div class="contact-info-icon green">📍</div>
-              <h4>品牌所在地</h4>
-              <p>吉林省长春市<br>辐射白山市、通化市、延边州等革命老区</p>
+          <div class="input-card">
+            <label>咨询类型</label>
+            <div class="inquiry-tags" id="inquiryTags">
+              <span class="inquiry-tag active" data-type="product" onclick="selectInquiryType(this)">产品咨询</span>
+              <span class="inquiry-tag" data-type="business" onclick="selectInquiryType(this)">商务合作</span>
+              <span class="inquiry-tag" data-type="media" onclick="selectInquiryType(this)">媒体联系</span>
+              <span class="inquiry-tag" data-type="other" onclick="selectInquiryType(this)">其他事宜</span>
             </div>
+          </div>
 
-            <div class="contact-info-card">
-              <div class="contact-info-icon gold">📧</div>
+          <div class="input-card">
+            <label>留言内容</label>
+            <textarea placeholder="请简述您的需求或合作意向，我们将尽快与您取得联系…" required></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit-contact">发送留言</button>
+        </form>
+      </div>
+
+      <!-- 右侧：联系信息 -->
+      <div class="info-panel reveal-contact" id="infoPanel">
+        <!-- 地图 -->
+        <div class="info-card">
+          <div class="map-placeholder">
+            <div class="map-pin">📍</div>
+            <div class="map-label">吉林省长春市</div>
+            <div class="map-sub">辐射白山市、通化市、延边州等革命老区</div>
+          </div>
+        </div>
+
+        <!-- 邮箱 -->
+        <div class="info-card">
+          <div class="info-row">
+            <div class="info-icon-circle email">📧</div>
+            <div>
               <h4>电子邮箱</h4>
-              <p>contact@jiyangweilai.cn<br>商务合作专用</p>
+              <p class="info-detail">
+                contact@jiyangweilai.cn
+                <button class="btn-copy" onclick="copyEmail('contact@jiyangweilai.cn', this)" title="复制邮箱">📋 复制</button>
+              </p>
+              <p class="info-detail" style="font-size:0.78rem;margin-top:2px;">商务合作专用，工作日24h内回复</p>
             </div>
+          </div>
+        </div>
 
-            <div class="contact-info-card">
-              <div class="contact-info-icon red">📱</div>
+        <!-- 电话 -->
+        <div class="info-card">
+          <div class="info-row">
+            <div class="info-icon-circle phone">📞</div>
+            <div>
+              <h4>联系电话</h4>
+              <p class="info-detail clickable" onclick="window.location.href='tel:16643063520'">166-4306-3520</p>
+              <p class="info-detail" style="font-size:0.78rem;margin-top:2px;">工作日 9:00 - 18:00</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 社交媒体 -->
+        <div class="info-card">
+          <div class="info-row" style="margin-bottom: var(--space-md);">
+            <div class="info-icon-circle social">💬</div>
+            <div>
               <h4>社交媒体</h4>
-              <p>关注我们，了解更多品牌动态与产品信息</p>
-              <div class="social-links">
-                <a href="#" class="social-link">💬 微信公众号</a>
-                <a href="#" class="social-link">📕 小红书</a>
-                <a href="#" class="social-link">🎵 抖音</a>
-              </div>
+              <p class="info-detail">关注我们，了解品牌动态与新品信息</p>
             </div>
-
-            <div class="contact-info-card">
-              <div class="contact-info-icon green">🤝</div>
-              <h4>合作方向</h4>
-              <p>品牌联名、渠道合作、原料供应、校园推广——欢迎各界伙伴与我们携手共赢</p>
-            </div>
+          </div>
+          <div class="social-circles">
+            <a href="#" class="social-circle wechat" data-tooltip="微信公众号" title="微信公众号">💚</a>
+            <a href="#" class="social-circle xiaohongshu" data-tooltip="小红书" title="小红书">📕</a>
+            <a href="#" class="social-circle douyin" data-tooltip="抖音" title="抖音">🎵</a>
+            <a href="#" class="social-circle weibo" data-tooltip="微博" title="微博">🔴</a>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section faq-section">
-      <div class="section-inner">
-        <div class="section-header reveal">
-          <span class="text-eyebrow">常见问题</span>
-          <h2>你可能想了解</h2>
-        </div>
-        <div class="faq-list reveal">
-          <div class="faq-item">
-            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-              <span>吉养未来的产品属于什么类别？</span>
-              <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-              吉养未来所有产品均为普通预包装食品，严格遵守《食品安全法》《广告法》等相关规定，不涉及任何医疗、保健或治疗功能宣传。所有产品均明确标注"普通预包装食品，不能代替药品"。
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-              <span>产品的原料来自哪里？</span>
-              <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-              我们的核心原料均来自吉林革命老区：长白山山野菜产自白山市，鲜食玉米来自通化市及周边产区，黑木耳和蓝莓主要来自延边州和长白山保护区。我们优先与当地合作社建立订单化采购合作，确保原料品质和稳定供应。
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-              <span>如何与吉养未来合作？</span>
-              <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-              我们欢迎各类合作伙伴：品牌联名、线上线下渠道合作、食品原料供应合作、校园推广伙伴等。请通过本页面的联系表单提交合作意向，或发送邮件至商务合作邮箱，我们会尽快与您取得联系。
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-              <span>产品支持全国配送吗？</span>
-              <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-              目前我们正在逐步完善全国物流网络，优先覆盖东三省及华北地区。随着业务拓展，配送范围将逐步扩大至全国。具体配送范围请在下单时确认。
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-              <span>小膳AI助手如何使用？</span>
-              <span class="faq-toggle">+</span>
-            </div>
-            <div class="faq-answer">
-              小膳是我们的AI营养科普助手，您可以在"AI智能体小膳"页面直接与它对话。它可以帮您查询食品营养知识、提供合理膳食建议、介绍吉林特色食材等。小膳基于大语言模型开发，旨在提供营养科普服务，不替代专业医疗建议。
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section">
-      <div class="section-inner reveal">
-        <div class="cta-banner">
-          <h2>期待与您相遇</h2>
-          <p>关注吉养未来，了解更多吉林革命老区的红色故事与自然好物</p>
-          <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
-            <a href="products.html" class="btn btn-gold btn-lg">探索产品</a>
-            <a href="brand.html" class="btn btn-outline btn-lg" style="border-color: rgba(255,255,255,0.4); color: white;">了解品牌</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
         <a href="index.html" class="nav-logo">
-          <span class="logo-icon">吉</span>
+          <span class="logo-icon"><img src="images/logo.png" alt="吉养未来" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none';this.parentElement.textContent='吉';"></span>
           吉养未来
         </a>
         <p>传承东北抗联精神<br>吉林革命老区红色助农食品品牌</p>
@@ -393,5 +695,131 @@
   </footer>
 
   <script src="js/global.js"></script>
+  <script>
+    // ===== 咨询类型选择 =====
+    window.selectInquiryType = function (el) {
+      document.querySelectorAll('.inquiry-tag').forEach(function (t) {
+        t.classList.remove('active');
+      });
+      el.classList.add('active');
+    };
+
+    // ===== 表单提交 =====
+    window.handleContactSubmit = function (e) {
+      e.preventDefault();
+      var toast = document.getElementById('contactToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'contactToast';
+        toast.className = 'toast-contact';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = '✅ 感谢您的留言！我们会尽快回复。';
+      toast.classList.add('show');
+      setTimeout(function () {
+        toast.classList.remove('show');
+      }, 3000);
+      document.getElementById('contactForm').reset();
+      // 恢复默认选中
+      document.querySelectorAll('.inquiry-tag').forEach(function (t, i) {
+        t.classList.toggle('active', i === 0);
+      });
+      return false;
+    };
+
+    // ===== 复制邮箱 =====
+    window.copyEmail = function (email, btn) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(email).then(function () {
+          btn.textContent = '✅ 已复制';
+          setTimeout(function () { btn.textContent = '📋 复制'; }, 2000);
+        });
+      } else {
+        var input = document.createElement('input');
+        input.value = email;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        btn.textContent = '✅ 已复制';
+        setTimeout(function () { btn.textContent = '📋 复制'; }, 2000);
+      }
+    };
+
+    // ===== 滚动渐显 =====
+    (function () {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.2 });
+
+      document.querySelectorAll('.reveal-contact').forEach(function (el) {
+        observer.observe(el);
+      });
+    })();
+
+    // ===== 轻量光粒子 =====
+    (function () {
+      var canvas = document.getElementById('contactParticles');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var particles = [];
+      var maxParticles = 15;
+
+      function resize() {
+        var rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      function createParticle() {
+        return {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 1.2 + 0.3,
+          speedY: -(Math.random() * 0.15 + 0.05),
+          speedX: (Math.random() - 0.5) * 0.1,
+          opacity: Math.random() * 0.25 + 0.05,
+          life: Math.random() * 500 + 200,
+          age: Math.random() * 500,
+          color: Math.random() > 0.3 ? '212, 166, 58' : '255, 220, 160'
+        };
+      }
+
+      for (var i = 0; i < maxParticles; i++) {
+        particles.push(createParticle());
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          p.x += p.speedX + Math.sin(p.age * 0.01) * 0.08;
+          p.y += p.speedY;
+          p.age++;
+
+          if (p.age > p.life || p.y < -20) {
+            particles[i] = createParticle();
+            p = particles[i];
+            p.y = canvas.height + 20;
+          }
+
+          var alpha = p.opacity * (1 - Math.abs(p.age / p.life - 0.5) * 2);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + p.color + ', ' + Math.max(0, alpha) + ')';
+          ctx.fill();
+        }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
 </body>
 </html>

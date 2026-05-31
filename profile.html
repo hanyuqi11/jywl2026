@@ -186,6 +186,24 @@
       color: var(--color-red-600);
     }
 
+    .order-tracking {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #e0e0e0;
+      font-size: 0.82rem;
+      color: #666;
+    }
+    .order-tracking strong {
+      color: #333;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .no-tracking {
+      color: #bbb;
+      font-style: italic;
+      font-size: 0.8rem;
+    }
+
     /* Favorites */
     .favorites-grid {
       display: grid;
@@ -307,6 +325,8 @@
         <a href="brand.html" class="nav-link">品牌故事</a>
         <a href="xiaoshan.html" class="nav-link">AI小膳</a>
         <a href="contact.html" class="nav-link">联系我们</a>
+        <a href="profile.html" class="nav-link active">个人中心</a>
+        <a href="javascript:void(0)" class="nav-link" onclick="toggleCart()" id="cartNavLink">🛒 购物车<span class="cart-badge-nav" id="cartBadgeNav">0</span></a>
       </div>
       <a href="products.html" class="nav-cta">支持老区助农</a>
       <button class="nav-toggle" aria-label="菜单">
@@ -336,6 +356,9 @@
             <p class="member-since">会员 · 2025年加入</p>
             <nav class="profile-menu">
               <a href="#" class="active" data-tab="orders">
+                <span class="menu-icon">📦</span> 我的订单
+              </a>
+              <a href="#" data-tab="subscription">
                 <span class="menu-icon">📮</span> 品牌订阅
               </a>
               <a href="#" data-tab="favorites">
@@ -354,6 +377,22 @@
           <main class="profile-main">
             <!-- Orders Tab -->
             <div id="tab-orders" class="profile-tab-content">
+              <div class="profile-tab-header">
+                <h2>我的订单</h2>
+                <p>查看您的订单状态和物流信息</p>
+              </div>
+              <div class="order-list" id="orderListContainer">
+                <div class="empty-state" id="orderEmptyState">
+                  <div class="empty-icon">📦</div>
+                  <h3>还没有订单</h3>
+                  <p>快去选购老区好物吧</p>
+                  <a href="products.html" class="btn btn-primary" style="margin-top:12px;">去选购</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Subscription Tab -->
+            <div id="tab-subscription" class="profile-tab-content" style="display:none;">
               <div class="profile-tab-header">
                 <h2>品牌订阅</h2>
                 <p>关注吉养未来最新动态</p>
@@ -456,7 +495,7 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <a href="index.html" class="nav-logo">
-          <span class="logo-icon">吉</span>
+          <span class="logo-icon"><img src="images/logo.png" alt="吉养未来" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none';this.parentElement.textContent='吉';"></span>
           吉养未来
         </a>
         <p>传承东北抗联精神<br>吉林革命老区红色助农食品品牌</p>
@@ -508,6 +547,75 @@
       tag.addEventListener('click', function() {
         this.classList.toggle('selected');
       });
+    });
+
+    // ====== 订单渲染 ======
+    function renderOrders() {
+      var container = document.getElementById('orderListContainer');
+      var emptyState = document.getElementById('orderEmptyState');
+      if (!container) return;
+
+      var orders = [];
+      try { orders = JSON.parse(localStorage.getItem('jiyang_orders')) || []; } catch (e) {}
+
+      if (orders.length === 0) {
+        if (emptyState) emptyState.style.display = 'block';
+        return;
+      }
+
+      if (emptyState) emptyState.style.display = 'none';
+
+      var html = '';
+      orders.forEach(function (order) {
+        var statusClass = order.status === '待发货' ? 'status-pending' : (order.status === '已发货' ? 'status-shipped' : 'status-completed');
+        // Build items list
+        var itemsHtml = '';
+        order.items.forEach(function (item) {
+          var imgSrc = item.image || '';
+          itemsHtml += '<div class="order-product">' +
+            '<div class="order-product-icon ' + (item.image ? '' : 'gold') + '">' +
+            (imgSrc ? '<img src="' + imgSrc + '" alt="' + item.name + '" style="width:48px;height:48px;object-fit:contain;border-radius:6px;">' : item.emoji) +
+            '</div>' +
+            '<div><h4>' + item.name + '</h4><span>' + item.sku + ' ×' + item.qty + '</span></div>' +
+            '</div>';
+        });
+
+        // Tracking info
+        var trackingHtml = '';
+        if (order.tracking) {
+          trackingHtml = '<div class="order-tracking">📦 快递单号：<strong>' + order.tracking + '</strong></div>';
+        } else if (order.status === '待发货') {
+          trackingHtml = '<div class="order-tracking no-tracking">📦 快递单号将在发货后更新，请留意短信通知</div>';
+        } else {
+          trackingHtml = '<div class="order-tracking">📦 快递单号：<strong>' + (order.tracking || '已签收') + '</strong></div>';
+        }
+
+        html += '<div class="order-card">' +
+          '<div class="order-header">' +
+          '<div class="order-id">订单编号：' + order.orderId + ' | ' + order.time + '</div>' +
+          '<div class="order-status ' + statusClass + '">' + order.status + '</div>' +
+          '</div>' +
+          '<div class="order-products">' + itemsHtml + '</div>' +
+          '<div class="order-footer">' +
+          '<span style="font-size: 0.82rem; color: #999;">收货人：' + order.name + ' ' + order.phone + '</span>' +
+          '<span class="order-total">¥' + order.total.toFixed(2) + '</span>' +
+          '</div>' +
+          trackingHtml +
+          '<div style="margin-top:4px;font-size:0.75rem;color:#bbb;">' + (order.address || '') + '</div>' +
+          '</div>';
+      });
+
+      // Clear container and add rendered orders
+      container.querySelectorAll('.order-card').forEach(function (el) { el.remove(); });
+      container.insertAdjacentHTML('beforeend', html);
+    }
+
+    // Render on page load
+    renderOrders();
+
+    // Re-render when switching to orders tab
+    document.querySelectorAll('.profile-menu a[data-tab="orders"]').forEach(function (link) {
+      link.addEventListener('click', renderOrders);
     });
   </script>
 </body>

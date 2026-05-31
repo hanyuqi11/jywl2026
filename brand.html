@@ -15,7 +15,7 @@
       text-align: center;
       background:
         radial-gradient(ellipse at 50% 30%, rgba(58, 16, 16, 0.05) 0%, rgba(26, 5, 8, 0.15) 50%, rgba(10, 2, 3, 0.3) 100%),
-        url('images/hero-bg.jpg') center/cover no-repeat;
+        url('images/品牌故事背景.png') center/cover no-repeat;
       color: white;
       position: relative;
       overflow: hidden;
@@ -278,6 +278,8 @@
         <a href="brand.html" class="nav-link active">品牌故事</a>
         <a href="xiaoshan.html" class="nav-link">AI小膳</a>
         <a href="contact.html" class="nav-link">联系我们</a>
+        <a href="profile.html" class="nav-link">个人中心</a>
+        <a href="javascript:void(0)" class="nav-link" onclick="toggleCart()" id="cartNavLink">🛒 购物车<span class="cart-badge-nav" id="cartBadgeNav">0</span></a>
       </div>
       <a href="products.html" class="nav-cta">支持老区助农</a>
       <button class="nav-toggle" aria-label="菜单">
@@ -319,6 +321,9 @@
               <p>杨靖宇等革命先烈在长白山地区浴血奋战，形成了坚定信念、艰苦奋斗、百折不挠的东北抗联精神。吉林的白山、通化等地至今承载着这段红色记忆。</p>
             </div>
             <div class="timeline-dot" style="top: 30px;"></div>
+            <div class="timeline-content right" style="padding:0;overflow:hidden;display:flex;align-items:stretch;background:transparent;box-shadow:none;">
+              <img src="images/长春抗联.jpg" alt="东北抗联" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg);min-height:220px;">
+            </div>
           </div>
 
           <div class="timeline-item">
@@ -430,7 +435,9 @@
           <h2>我们的远方</h2>
         </div>
         <div class="split-section reveal">
-          <div class="split-visual" style="background: linear-gradient(135deg, var(--color-green-50), var(--color-gold-100)); font-size: 5rem;">🌅</div>
+          <div class="split-visual" style="overflow:hidden;border-radius:var(--radius-lg);">
+          <img src="images/未来愿景.png" alt="未来愿景" style="width:100%;height:100%;object-fit:cover;">
+        </div>
           <div>
             <h3 style="margin-bottom: var(--space-md);">让吉林好物走向全国</h3>
             <p class="text-body" style="margin-bottom: var(--space-lg);">
@@ -454,7 +461,7 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <a href="index.html" class="nav-logo">
-          <span class="logo-icon">吉</span>
+          <span class="logo-icon"><img src="images/logo.png" alt="吉养未来" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.display='none';this.parentElement.textContent='吉';"></span>
           吉养未来
         </a>
         <p>传承东北抗联精神<br>吉林革命老区红色助农食品品牌</p>
